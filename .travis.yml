@@ -1,0 +1,37 @@
+sudo: required
+addons:
+  chrome: stable
+
+language: node_js
+node_js:
+  - node
+
+cache:
+  npm: true
+  directories:
+    - node_modules
+
+script:
+  - npm install codecov -g
+  - npm run ci
+
+after_success:
+  - codecov
+
+deploy:
+  - provider: pages
+    local_dir: docs
+    skip_cleanup: true
+    github_token: $GITHUB_TOKEN
+    keep_history: true
+    on:
+      branch: master
+#  - provider: npm
+#    local_dir: dist
+#    email: $NPM_EMAIL
+#    skip_cleanup: true
+#    api_key:
+#      secure: $NPM_KEY
+#    on:
+#      tags: true
+#      repo: janmalch/comparing
