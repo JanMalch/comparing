@@ -18,7 +18,7 @@
   
 Make sure to checkout the [complete docs][docs-url].   
   
-![Docs](https://img.shields.io/badge/docs%20coverage-100%25-brightgreen)  
+[![Docs](https://img.shields.io/badge/docs%20coverage-100%25-brightgreen)][docs-url]  
   
 ## Installation & Usage  
   
@@ -47,7 +47,7 @@ const result = ['aB', 'bB', 'aa'].sort(complex);
 expect(result).toEqual(['bB', 'aa', 'aB']);  
 ```  
   
-[docs-url]: http://janmalch.github.io/comparing/  
+[docs-url]: https://janmalch.github.io/comparing/  
 [npm-url]: https://www.npmjs.com/package/comparing  
 [build-url]: https://travis-ci.org/JanMalch/comparing  
 [codecov-url]:https://codecov.io/gh/JanMalch/comparing
