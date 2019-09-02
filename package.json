@@ -18,6 +18,10 @@
     "type": "git",
     "url": "https://www.github.com/JanMalch/comparing"
   },
+  "homepage": "https://janmalch.github.io/comparing",
+  "bugs": {
+    "url": "https://github.com/JanMalch/comparing/issues"
+  },
   "license": "MIT",
   "engines": {
     "node": ">=6.0.0"
@@ -33,7 +37,8 @@
     "start": "rollup -c rollup.config.ts -w",
     "test": "jest --coverage",
     "test:prod": "npm run lint && npm run test -- --no-cache",
-    "ci": "npm run test:prod && npm run build"
+    "ci": "npm run test:prod && npm run build",
+    "release": "standard-version"
   },
   "jest": {
     "transform": {
@@ -83,6 +88,21 @@
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
+  "standard-version": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "header": "",
+    "types": [
+      {"type": "feat", "section": "Features"},
+      {"type": "fix", "section": "Bug Fixes"},
+      {"type": "chore", "hidden": true},
+      {"type": "docs", "hidden": true},
+      {"type": "style", "hidden": true},
+      {"type": "refactor", "section":  "Code Refactoring"},
+      {"type": "perf", "section": "Performance Improvements"},
+      {"type": "test", "hidden": true},
+      {"type":  "build", "hidden":  true}
+    ]
+  },
   "devDependencies": {
     "@commitlint/cli": "^7.1.2",
     "@commitlint/config-conventional": "^7.1.2",
@@ -104,6 +124,7 @@
     "rollup-plugin-node-resolve": "^3.4.0",
     "rollup-plugin-sourcemaps": "^0.4.2",
     "rollup-plugin-typescript2": "^0.18.0",
+    "standard-version": "^7.0.0",
     "touch": "^3.1.0",
     "ts-jest": "^23.10.2",
     "ts-node": "^7.0.1",
