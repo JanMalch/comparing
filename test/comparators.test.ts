@@ -217,4 +217,20 @@ describe('Comparators', () => {
       expect(isComparator(comparator)).toBe(true);
     });
   });
+
+  describe('naturalOrder', () => {
+    it('should compare in natural order', () => {
+      const actual = [4, 1, 3, 5].sort(Comparators.naturalOrder);
+      const expected = [1, 3, 4, 5];
+      expect(actual).toEqual(expected);
+    });
+  });
+
+  describe('reversedOrder', () => {
+    it('should compare in reverse order', () => {
+      const actual = [4, 1, 3, 5].sort(Comparators.reversedOrder);
+      const expected = [5, 4, 3, 1];
+      expect(actual).toEqual(expected);
+    });
+  });
 });
