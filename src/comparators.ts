@@ -75,13 +75,15 @@ export class Comparators {
    */
   static readonly localeCompare: Comparator<any> = Comparators.of((a: any, b: any) =>
     a.toString().localeCompare(b.toString())
-  ); // tslint:disable-next-line:completed-docs
+  );
 
   /**
    * Compares two values by their length property
    * @param a first value
    * @param b second value
-   */ static readonly byLength: Comparator<{ length: number }> = Comparators.of(
+   */
+  // tslint:disable-next-line:completed-docs
+  static readonly byLength: Comparator<{ length: number }> = Comparators.of(
     (a, b) => a.length - b.length
   );
 
