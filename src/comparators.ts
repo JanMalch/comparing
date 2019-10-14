@@ -33,6 +33,15 @@ export class Comparators {
   static readonly naturalOrder: Comparator<any> = Comparators.lessThan;
 
   /**
+   * Compares two values by their reverse order.
+   * Reverse of `Comparators.naturalOrder`.
+   * @param a first value
+   * @param b second value
+   * @see [[Comparators.naturalOrder]]
+   */
+  static readonly reversedOrder: Comparator<any> = Comparators.naturalOrder.reversed();
+
+  /**
    * Compares the values a and b with the > operator.
    * For strings the alphabetical order will be implied.
    * Returns 0 if values are strictly equal.
@@ -66,14 +75,13 @@ export class Comparators {
    */
   static readonly localeCompare: Comparator<any> = Comparators.of((a: any, b: any) =>
     a.toString().localeCompare(b.toString())
-  );
+  ); // tslint:disable-next-line:completed-docs
 
   /**
    * Compares two values by their length property
    * @param a first value
    * @param b second value
-   */ // tslint:disable-next-line:completed-docs
-  static readonly byLength: Comparator<{ length: number }> = Comparators.of(
+   */ static readonly byLength: Comparator<{ length: number }> = Comparators.of(
     (a, b) => a.length - b.length
   );
 
