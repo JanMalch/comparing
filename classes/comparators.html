@@ -2408,6 +2408,9 @@ img {
 					<a href="comparators.html#nulllast" class="tsd-kind-icon">null<wbr>Last</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
+					<a href="comparators.html#reversedorder" class="tsd-kind-icon">reversed<wbr>Order</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
 					<a href="comparators.html#unchanged" class="tsd-kind-icon">unchanged</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
@@ -2476,6 +2479,7 @@ img {
 							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="comparators.html#naturalorder" class="tsd-kind-icon">natural<wbr>Order</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="comparators.html#nullfirst" class="tsd-kind-icon">null<wbr>First</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="comparators.html#nulllast" class="tsd-kind-icon">null<wbr>Last</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="comparators.html#reversedorder" class="tsd-kind-icon">reversed<wbr>Order</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="comparators.html#unchanged" class="tsd-kind-icon">unchanged</a></li>
 						</ul>
 					</section>
@@ -2503,7 +2507,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/2453a02/src/comparators.ts#L6">comparators.ts:6</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/e0c9f33/src/comparators.ts#L6">comparators.ts:6</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <a href="comparators.html" class="tsd-signature-type">Comparators</a></h4>
@@ -2519,7 +2523,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">by<wbr>Length<span class="tsd-signature-symbol">:</span> <a href="../globals.html#comparator" class="tsd-signature-type">Comparator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;Comparators.of((a, b) &#x3D;&gt; a.length - b.length)</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/2453a02/src/comparators.ts#L76">comparators.ts:76</a></li>
+						<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/e0c9f33/src/comparators.ts#L86">comparators.ts:86</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2542,7 +2546,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">greater<wbr>Than<span class="tsd-signature-symbol">:</span> <a href="../globals.html#comparator" class="tsd-signature-type">Comparator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;Comparators.of((a: any, b: any) &#x3D;&gt;a &#x3D;&#x3D;&#x3D; b ? 0 : a &gt; b ? -1 : 1)</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/2453a02/src/comparators.ts#L42">comparators.ts:42</a></li>
+						<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/e0c9f33/src/comparators.ts#L51">comparators.ts:51</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2567,7 +2571,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">ignore<wbr>Case<span class="tsd-signature-symbol">:</span> <a href="../globals.html#comparator" class="tsd-signature-type">Comparator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;Comparators.of((a: any, b: any) &#x3D;&gt;a.toString().toLowerCase().localeCompare(b.toString().toLowerCase()))</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/2453a02/src/comparators.ts#L53">comparators.ts:53</a></li>
+						<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/e0c9f33/src/comparators.ts#L62">comparators.ts:62</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2594,7 +2598,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">less<wbr>Than<span class="tsd-signature-symbol">:</span> <a href="../globals.html#comparator" class="tsd-signature-type">Comparator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;Comparators.of((a: any, b: any) &#x3D;&gt;a &#x3D;&#x3D;&#x3D; b ? 0 : a &lt; b ? -1 : 1)</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/2453a02/src/comparators.ts#L22">comparators.ts:22</a></li>
+						<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/e0c9f33/src/comparators.ts#L22">comparators.ts:22</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2619,7 +2623,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">locale<wbr>Compare<span class="tsd-signature-symbol">:</span> <a href="../globals.html#comparator" class="tsd-signature-type">Comparator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;Comparators.of((a: any, b: any) &#x3D;&gt;a.toString().localeCompare(b.toString()))</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/2453a02/src/comparators.ts#L67">comparators.ts:67</a></li>
+						<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/e0c9f33/src/comparators.ts#L76">comparators.ts:76</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2646,7 +2650,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">natural<wbr>Order<span class="tsd-signature-symbol">:</span> <a href="../globals.html#comparator" class="tsd-signature-type">Comparator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;Comparators.lessThan</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/2453a02/src/comparators.ts#L33">comparators.ts:33</a></li>
+						<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/e0c9f33/src/comparators.ts#L33">comparators.ts:33</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2673,7 +2677,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">null<wbr>First<span class="tsd-signature-symbol">:</span> <a href="../globals.html#comparator" class="tsd-signature-type">Comparator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;Comparators.of((a, b) &#x3D;&gt; {if (a &#x3D;&#x3D; null &amp;&amp; b &#x3D;&#x3D; null) {return 0;} else if (a &#x3D;&#x3D; null) {return -1;} else if (b &#x3D;&#x3D; null) {return 1;}return 0;})</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/2453a02/src/comparators.ts#L85">comparators.ts:85</a></li>
+						<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/e0c9f33/src/comparators.ts#L95">comparators.ts:95</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2696,7 +2700,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">null<wbr>Last<span class="tsd-signature-symbol">:</span> <a href="../globals.html#comparator" class="tsd-signature-type">Comparator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;Comparators.of((a, b) &#x3D;&gt; {if (a &#x3D;&#x3D; null &amp;&amp; b &#x3D;&#x3D; null) {return 0;} else if (a &#x3D;&#x3D; null) {return 1;} else if (b &#x3D;&#x3D; null) {return -1;}return 0;})</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/2453a02/src/comparators.ts#L101">comparators.ts:101</a></li>
+						<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/e0c9f33/src/comparators.ts#L111">comparators.ts:111</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2714,12 +2718,39 @@ img {
 				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
+				<a name="reversedorder" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagStatic">Static</span> reversed<wbr>Order</h3>
+				<div class="tsd-signature tsd-kind-icon">reversed<wbr>Order<span class="tsd-signature-symbol">:</span> <a href="../globals.html#comparator" class="tsd-signature-type">Comparator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;Comparators.naturalOrder.reversed()</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/e0c9f33/src/comparators.ts#L42">comparators.ts:42</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Compares two values by their reverse order.
+						Reverse of <code>Comparators.naturalOrder</code>.</p>
+					</div>
+					<dl class="tsd-comment-tags">
+						<dt>param</dt>
+						<dd><p>first value</p>
+						</dd>
+						<dt>param</dt>
+						<dd><p>second value</p>
+						</dd>
+						<dt>see</dt>
+						<dd><p><a href="comparators.html#naturalorder">Comparators.naturalOrder</a></p>
+						</dd>
+					</dl>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
 				<a name="unchanged" class="tsd-anchor"></a>
 				<h3><span class="tsd-flag ts-flagStatic">Static</span> unchanged</h3>
 				<div class="tsd-signature tsd-kind-icon">unchanged<span class="tsd-signature-symbol">:</span> <a href="../globals.html#comparator" class="tsd-signature-type">Comparator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;Comparators.of(() &#x3D;&gt; 0)</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/2453a02/src/comparators.ts#L13">comparators.ts:13</a></li>
+						<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/e0c9f33/src/comparators.ts#L13">comparators.ts:13</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2741,7 +2772,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/2453a02/src/comparators.ts#L145">comparators.ts:145</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/e0c9f33/src/comparators.ts#L155">comparators.ts:155</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2783,7 +2814,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/2453a02/src/comparators.ts#L164">comparators.ts:164</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/e0c9f33/src/comparators.ts#L174">comparators.ts:174</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2823,7 +2854,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/2453a02/src/comparators.ts#L132">comparators.ts:132</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/e0c9f33/src/comparators.ts#L142">comparators.ts:142</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2863,7 +2894,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/2453a02/src/comparators.ts#L120">comparators.ts:120</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/e0c9f33/src/comparators.ts#L130">comparators.ts:130</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
