@@ -1,6 +1,7 @@
 /**
  * Type alias for a function that compares two values for sorting purposes.
  * @see [[Comparators.of]]
+ * @typeparam T type of the values to compare
  */
 export type CompareFunction<T> = (a: T, b: T) => number;
 
@@ -11,6 +12,7 @@ export type CompareFunction<T> = (a: T, b: T) => number;
  * Has a `reversed` function to invert the results of this comparator.
  * Comparator functions like these may be constructed by using `Comparators.of`.
  * @see [[Comparators.of]]
+ * @typeparam T type of the values to compare
  */
 export type Comparator<T> = CompareFunction<T> & {
   /**

@@ -126,6 +126,11 @@ export class Comparators {
    * @param comparator comparator function to
    * @typeparam T type of the values to compare
    * @typeparam O type of the extracted value to compare by
+   * @example
+   * const idComparator = Comparators.with<{ id: string }, string>(
+   *   x => x.id,
+   *   Comparators.ignoreCase
+   * );
    */
   static with<T, O>(
     extractor: (t: T) => O,
@@ -151,6 +156,8 @@ export class Comparators {
    * `null`-like values will be removed.
    * @param comparators array of comparator functions
    * @typeparam T type of the values to compare
+   * @example
+   * Comparators.compose([Comparators.byLength, Comparators.ignoreCase]);
    */
   static compose<T>(comparators: Array<CompareFunction<T> | undefined | null>): Comparator<T> {
     const _comparators = comparators.filter(Boolean) as Array<CompareFunction<T>>;
@@ -170,6 +177,8 @@ export class Comparators {
    * Creates a `Comparator` function, by mutating the given comparator function.
    * @param comparator the actual comparator function
    * @typeparam T type of the values to compare
+   * @example
+   * Comparators.of<number>((a, b) => b - a).reversed();
    */
   static of<T>(comparator: CompareFunction<T>): Comparator<T> {
     (comparator as Comparator<T>).then = function(subsequent: CompareFunction<T>) {
@@ -192,6 +201,7 @@ export class Comparators {
    * Creates a `Comparator` that will sort a set of known values as specified in the given array.
    * If the produced comparator receives an unknown value, an error will be thrown.
    * @param values the values in desired order
+   * @typeparam T type of the values to compare
    * @example
    * const comparator = Comparators.ofOrder(['b', 'a', 'c']);
    * const actual = ['b', 'a', 'c', 'b', 'b', 'c', 'a'].sort(comparator);

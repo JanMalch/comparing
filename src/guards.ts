@@ -8,6 +8,7 @@ import { Comparator, CompareFunction } from './types';
  * - has a `reversed` function, which takes zero arguments
  * @param input any input value
  * @see [[isCompareFunction]]
+ * @typeparam T type of the values to compare
  */
 export function isComparator<T>(input: any): input is Comparator<T> {
   return (
@@ -28,6 +29,7 @@ export function isComparator<T>(input: any): input is Comparator<T> {
  * - takes two arguments
  * @param input any input value
  * @see [[isComparator]]
+ * @typeparam T type of the values to compare
  */
 export function isCompareFunction<T>(input: any): input is CompareFunction<T> {
   return typeof input === 'function' && input.length === 2;
