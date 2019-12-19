@@ -233,4 +233,51 @@ describe('Comparators', () => {
       expect(actual).toEqual(expected);
     });
   });
+
+  describe('ofOrder', () => {
+    it('should use the specified order', () => {
+      const comparator = Comparators.ofOrder(['b', 'a', 'c']);
+      const actual = ['b', 'a', 'c', 'b', 'b', 'c', 'a'].sort(comparator);
+      const expected = ['b', 'b', 'b', 'a', 'a', 'c', 'c'];
+      expect(actual).toEqual(expected);
+    });
+
+    it('should throw an error for unknown values', () => {
+      const comparator = Comparators.ofOrder([1, 2, 3]);
+      expect(() => [3, 2, 4, 1].sort(comparator)).toThrow('Unknown value for sorting: 4 (number)');
+      expect(() => [4, 1].sort(comparator)).toThrow('Unknown value for sorting: 4 (number)');
+    });
+
+    it('should be useful or ordering by arbitrary type', () => {
+      enum MyType {
+        Foo = 'Foo',
+        Bar = 'Bar'
+      }
+
+      interface MyData {
+        id: number;
+        type: MyType | null;
+      }
+
+      const comparator = Comparators.with(
+        (d: MyData) => d.type,
+        Comparators.ofOrder([MyType.Bar, MyType.Foo, null])
+      ).then(Comparators.with((d: MyData) => d.id, Comparators.naturalOrder));
+      const actual = [
+        { id: 1, type: MyType.Bar },
+        { id: 3, type: MyType.Foo },
+        { id: 5, type: null },
+        { id: 4, type: MyType.Bar },
+        { id: 2, type: MyType.Foo }
+      ].sort(comparator);
+      const expected = [
+        { id: 1, type: MyType.Bar },
+        { id: 4, type: MyType.Bar },
+        { id: 2, type: MyType.Foo },
+        { id: 3, type: MyType.Foo },
+        { id: 5, type: null }
+      ];
+      expect(actual).toEqual(expected);
+    });
+  });
 });

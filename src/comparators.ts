@@ -187,4 +187,30 @@ export class Comparators {
     };
     return comparator as Comparator<T>;
   }
+
+  /**
+   * Creates a `Comparator` that will sort a set of known values as specified in the given array.
+   * If the produced comparator receives an unknown value, an error will be thrown.
+   * @param values the values in desired order
+   * @example
+   * const comparator = Comparators.ofOrder(['b', 'a', 'c']);
+   * const actual = ['b', 'a', 'c', 'b', 'b', 'c', 'a'].sort(comparator);
+   * const expected = ['b', 'b', 'b', 'a', 'a', 'c', 'c'];
+   * expect(actual).toEqual(expected);
+   */
+  static ofOrder<T>(values: T[]): Comparator<T> {
+    const order = new Map<T, number>();
+    let i = 0;
+    values.forEach(v => order.set(v, i++));
+
+    return Comparators.of((a: T, b: T) => {
+      if (!order.has(a)) {
+        throw new Error(`Unknown value for sorting: ${a} (${typeof a})`);
+      }
+      if (!order.has(b)) {
+        throw new Error(`Unknown value for sorting: ${b} (${typeof b})`);
+      }
+      return order.get(a)! - order.get(b)!;
+    });
+  }
 }

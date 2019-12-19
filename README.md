@@ -12,9 +12,9 @@
 - easily sort arrays of objects via [`Comparators.with`](http://janmalch.github.io/comparing/classes/comparators.html#with)  
 - easily combine predefined and custom Comparators  
 - chain or reverse your own custom Comparators  
+- define custom orders for enums or other arbitrary value sets
 - single [`Comparators` class](http://janmalch.github.io/comparing/classes/comparators.html#bylength) as a common namespace  
-- lightweight, only ~500 bytes gzipped  
-- ...  
+- lightweight, only ~500 bytes gzipped   
   
 Make sure to checkout the [complete docs][docs-url].   
   
@@ -26,7 +26,7 @@ Make sure to checkout the [complete docs][docs-url].
 npm i comparing  
 ```  
   
-Core functionality is contained in the [`Comparators` class](http://janmalch.github.io/comparing/classes/comparators.html#bylength).  
+All functionality is contained in the [`Comparators` class](http://janmalch.github.io/comparing/classes/comparators.html#bylength).  
   
 ```typescript  
 import { Comparators, CompareFunction, Comparator } from 'comparing';  
@@ -45,6 +45,10 @@ const complex: Comparator<string> = Comparators.of(myCompareFn)
   );
 const result = ['aB', 'bB', 'aa'].sort(complex);  
 expect(result).toEqual(['bB', 'aa', 'aB']);  
+
+// define your own order for known values
+const myEnumComparator = Comparators.ofOrder([MyEnum.C, MyEnum.A, MyEnum.B]);
+const dataComparator = Comparators.with(data => data.type, myEnumComparator);
 ```  
   
 [docs-url]: https://janmalch.github.io/comparing/  
