@@ -18,7 +18,7 @@
     "type": "git",
     "url": "https://www.github.com/JanMalch/comparing"
   },
-  "homepage": "https://janmalch.github.io/comparing",
+  "homepage": "https://janmalch.github.io/comparing#readme",
   "bugs": {
     "url": "https://github.com/JanMalch/comparing/issues"
   },
@@ -32,8 +32,8 @@
   "scripts": {
     "lint": "tslint --project tsconfig.json",
     "prebuild": "rimraf dist",
-    "build": "tsc --module commonjs && rollup -c rollup.config.ts && npm run build:docs",
-    "build:docs": "typedoc --out docs --target es6 --theme minimal --mode file src && npx touch ./docs/.nojekyll",
+    "build": "tsc --module commonjs && rollup -c rollup.config.ts",
+    "postbuild": "typedoc --out docs --target es6 --theme minimal --mode file src && npx touch ./docs/.nojekyll",
     "start": "rollup -c rollup.config.ts -w",
     "test": "jest --coverage",
     "test:prod": "npm run lint && npm run test -- --no-cache",
@@ -84,7 +84,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
+      "pre-commit": "lint-staged && npm run build && npm run test:prod",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
@@ -92,15 +92,15 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "header": "",
     "types": [
-      {"type": "feat", "section": "Features"},
-      {"type": "fix", "section": "Bug Fixes"},
-      {"type": "chore", "hidden": true},
-      {"type": "docs", "hidden": true},
-      {"type": "style", "hidden": true},
-      {"type": "refactor", "section":  "Code Refactoring"},
-      {"type": "perf", "section": "Performance Improvements"},
-      {"type": "test", "hidden": true},
-      {"type":  "build", "hidden":  true}
+      { "type": "feat", "section": "Features" },
+      { "type": "fix", "section": "Bug Fixes" },
+      { "type": "chore", "hidden": true },
+      { "type": "docs", "hidden": true },
+      { "type": "style", "hidden": true },
+      { "type": "refactor", "section": "Code Refactoring" },
+      { "type": "perf", "section": "Performance Improvements" },
+      { "type": "test", "hidden": true },
+      { "type": "build", "hidden": true }
     ]
   },
   "devDependencies": {
