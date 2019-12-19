@@ -200,8 +200,7 @@ export class Comparators {
    */
   static ofOrder<T>(values: T[]): Comparator<T> {
     const order = new Map<T, number>();
-    let i = 0;
-    values.forEach(v => order.set(v, i++));
+    values.forEach((v, i) => order.set(v, i));
 
     return Comparators.of((a: T, b: T) => {
       if (!order.has(a)) {
