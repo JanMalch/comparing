@@ -186,6 +186,55 @@ describe('Comparators', () => {
     });
   });
 
+  describe('trueFirst', () => {
+    it('should put trues first', () => {
+      const comparator = Comparators.trueFirst;
+      expect(comparator(true, false)).toBe(FIRST_BEFORE_SECOND);
+      expect(comparator(true, true)).toBe(FIRST_SAME_AS_SECOND);
+      expect(comparator(false, true)).toBe(FIRST_AFTER_SECOND);
+      expect(comparator(false, false)).toBe(FIRST_SAME_AS_SECOND);
+    });
+
+    it('should put nulls in array first', () => {
+      const expected = [true, true, false, false, false];
+      const actual = [false, true, false, false, true].sort(Comparators.trueFirst);
+      expect(actual).toEqual(expected);
+    });
+
+    it('should sort complex structures', () => {
+      const input = [
+        { id: 0, foo: true },
+        { id: 3, foo: false },
+        { id: 1, foo: false },
+        { id: 2, foo: true }
+      ];
+      const actual = input.sort(
+        // tslint:disable-next-line:completed-docs
+        Comparators.with<{ id: number; foo: boolean }, any>(x => x.foo, Comparators.trueFirst).then(
+          Comparators.with(x => x.id)
+        )
+      );
+
+      const expected = [
+        { id: 0, foo: true },
+        { id: 2, foo: true },
+        { id: 1, foo: false },
+        { id: 3, foo: false }
+      ];
+      expect(actual).toEqual(expected);
+    });
+  });
+
+  describe('trueLast', () => {
+    it('should put trues last', () => {
+      const comparator = Comparators.trueLast;
+      expect(comparator(false, true)).toBe(FIRST_BEFORE_SECOND);
+      expect(comparator(true, true)).toBe(FIRST_SAME_AS_SECOND);
+      expect(comparator(true, false)).toBe(FIRST_AFTER_SECOND);
+      expect(comparator(false, false)).toBe(FIRST_SAME_AS_SECOND);
+    });
+  });
+
   describe('then', () => {
     it('should only use first comparator if sufficient', () => {
       const comparator = Comparators.lessThan.then(Comparators.greaterThan);

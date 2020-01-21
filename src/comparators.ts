@@ -120,6 +120,24 @@ export class Comparators {
   });
 
   /**
+   * Compares two values and puts true first
+   * @param a first value
+   * @param b second value
+   */
+  static readonly trueFirst: Comparator<boolean> = Comparators.of((a, b) => {
+    return a === b ? 0 : a ? -1 : 1;
+  });
+
+  /**
+   * Compares two values and puts true last
+   * @param a first value
+   * @param b second value
+   */
+  static readonly trueLast: Comparator<boolean> = Comparators.of((a, b) => {
+    return a === b ? 0 : a ? 1 : -1;
+  });
+
+  /**
    * Compares two values based on the respective value, extracted by the given function.
    * By default the `naturalOrder` comparator will be used.
    * @param extractor the function used to extract the sort value, defaults to `naturalOrder`
