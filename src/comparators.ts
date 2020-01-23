@@ -140,7 +140,7 @@ export class Comparators {
   /**
    * Compares two values based on the respective value, extracted by the given function.
    * By default the `naturalOrder` comparator will be used.
-   * @param extractor the function used to extract the sort value, defaults to `naturalOrder`
+   * @param selector the function used to extract the sort value, defaults to `naturalOrder`
    * @param comparator comparator function to
    * @typeparam T type of the values to compare
    * @typeparam O type of the extracted value to compare by
@@ -151,10 +151,10 @@ export class Comparators {
    * );
    */
   static with<T, O>(
-    extractor: (t: T) => O,
+    selector: (t: T) => O,
     comparator: CompareFunction<O> = Comparators.naturalOrder
   ): Comparator<T> {
-    return Comparators.of((a: T, b: T) => comparator(extractor(a), extractor(b)));
+    return Comparators.of((a: T, b: T) => comparator(selector(a), selector(b)));
   }
 
   /**
