@@ -1,6 +1,6 @@
 {
   "name": "comparing",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Easily create descriptive comparators",
   "keywords": [
     "typescript",
