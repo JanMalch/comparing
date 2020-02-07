@@ -5,7 +5,11 @@
   "keywords": [
     "typescript",
     "utility",
-    "comparators"
+    "comparators",
+    "collections",
+    "lists",
+    "sort",
+    "sorting"
   ],
   "main": "dist/comparing.umd.js",
   "module": "dist/comparing.es5.js",
