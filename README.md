@@ -1,5 +1,5 @@
 
-# comparing  <a href="https://www.github.com/JanMalch/comparing"><img src="https://user-images.githubusercontent.com/25508038/63974103-75242700-caac-11e9-8ca4-71cc5b905e90.png" width="90" height="90" align="right"></a>  
+# comparing  <a href="https://www.github.com/JanMalch/comparing"><img src="https://www.github.com/JanMalch/comparing/blob/master/.github/logo.png" width="90" height="90" align="right"></a>  
   
 [![Docs](https://img.shields.io/badge/completed--docs-true-brightgreen)][docs-url] [![npm](https://badge.fury.io/js/comparing.svg)][npm-url] [![Travis-CI](https://travis-ci.org/JanMalch/comparing.svg?branch=master)][build-url] 
 [![codecov](https://codecov.io/gh/JanMalch/comparing/branch/master/graph/badge.svg)][codecov-url]
