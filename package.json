@@ -37,7 +37,7 @@
     "lint": "tslint --project tsconfig.json",
     "prebuild": "rimraf dist docs",
     "build": "tsc --module commonjs && rollup -c rollup.config.ts",
-    "postbuild": "typedoc --out docs --target es6 --theme minimal --mode file src && npx copyfiles .github/favicon.ico docs --flat && npx touch ./docs/.nojekyll ",
+    "postbuild": "typedoc --out docs --target es6 --theme minimal --mode file src && npx copyfiles .github/assets/favicon.ico docs --flat && npx touch ./docs/.nojekyll ",
     "start": "rollup -c rollup.config.ts -w",
     "test": "jest --coverage",
     "test:prod": "npm run lint && npm run test -- --no-cache",
