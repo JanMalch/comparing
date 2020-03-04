@@ -14,7 +14,7 @@
 - chain or reverse your own custom Comparators  
 - define custom orders for enums or other arbitrary value sets
 - single [`Comparators` class](http://janmalch.github.io/comparing/classes/comparators.html#bylength) as a common namespace  
-- lightweight, only ~500 bytes gzipped   
+- lightweight, only [~700 bytes](https://bundlephobia.com/result?p=comparing) gzipped   
   
 Make sure to checkout the [complete docs][docs-url].   
   
