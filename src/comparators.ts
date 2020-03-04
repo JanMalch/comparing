@@ -88,9 +88,10 @@ export class Comparators {
   );
 
   /**
-   * Compares two values and puts nulls first
+   * Compares two values and puts `null` first
    * @param a first value
    * @param b second value
+   * @see nullLast
    */
   static readonly nullFirst: Comparator<any> = Comparators.of((a, b) => {
     if (a == null && b == null) {
@@ -104,9 +105,10 @@ export class Comparators {
   });
 
   /**
-   * Compares two values and puts nulls last
+   * Compares two values and puts `null` last
    * @param a first value
    * @param b second value
+   * @see nullFirst
    */
   static readonly nullLast: Comparator<any> = Comparators.of((a, b) => {
     if (a == null && b == null) {
@@ -120,18 +122,20 @@ export class Comparators {
   });
 
   /**
-   * Compares two values and puts true first
+   * Compares two values and puts `true` first
    * @param a first value
    * @param b second value
+   * @see trueLast
    */
   static readonly trueFirst: Comparator<boolean> = Comparators.of((a, b) => {
     return a === b ? 0 : a ? -1 : 1;
   });
 
   /**
-   * Compares two values and puts true last
+   * Compares two values and puts `true` last
    * @param a first value
    * @param b second value
+   * @see trueFirst
    */
   static readonly trueLast: Comparator<boolean> = Comparators.of((a, b) => {
     return a === b ? 0 : a ? 1 : -1;
