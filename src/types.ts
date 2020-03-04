@@ -25,3 +25,9 @@ export type Comparator<T> = CompareFunction<T> & {
    */
   reversed: () => Comparator<T>;
 };
+
+/**
+ * A type that describes possible sort directions.
+ * @see Comparators.forDirection
+ */
+export type SortDirection = 'asc' | 'desc' | 'ascending' | 'descending' | '' | null;

@@ -1,4 +1,4 @@
-import { Comparator, CompareFunction } from './types';
+import { Comparator, CompareFunction, SortDirection } from './types';
 
 /**
  * Common Comparators and utilites to construct them.
@@ -166,6 +166,33 @@ export class Comparators {
     return Comparators.of((a, b) => {
       return -1 * comparator(a, b);
     });
+  }
+
+  /**
+   * Returns one of the following default comparators based on the given direction:
+   *
+   * - `Comparators.naturalOrder` for `'asc'` or `'ascending'`
+   * - `Comparators.reversedOrder` for `'desc'` or `'descending'`
+   * - otherwise `Comparators.unchanged`
+   * @param direction the desired direction
+   * @example
+   * const { active, direction } = mySort.state;
+   * const sortedData = data.sort(Comparators.with(
+   *   x => x[active],
+   *   Comparators.forDirection(direction)
+   * ));
+   */
+  static forDirection<T>(direction?: SortDirection): Comparator<T> {
+    switch (direction) {
+      case 'asc':
+      case 'ascending':
+        return Comparators.naturalOrder;
+      case 'desc':
+      case 'descending':
+        return Comparators.reversedOrder;
+      default:
+        return Comparators.unchanged;
+    }
   }
 
   /**

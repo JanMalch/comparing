@@ -283,6 +283,23 @@ describe('Comparators', () => {
     });
   });
 
+  describe('forDirection', () => {
+    it('should return Comparators.naturalOrder for ascending', () => {
+      expect(Comparators.forDirection('asc')).toBe(Comparators.naturalOrder);
+      expect(Comparators.forDirection('ascending')).toBe(Comparators.naturalOrder);
+    });
+    it('should return Comparators.reversedOrder for descending', () => {
+      expect(Comparators.forDirection('desc')).toBe(Comparators.reversedOrder);
+      expect(Comparators.forDirection('descending')).toBe(Comparators.reversedOrder);
+    });
+    it('should return Comparators.unchanged for other values', () => {
+      expect(Comparators.forDirection('')).toBe(Comparators.unchanged);
+      expect(Comparators.forDirection(null)).toBe(Comparators.unchanged);
+      expect(Comparators.forDirection(undefined)).toBe(Comparators.unchanged);
+      expect(Comparators.forDirection()).toBe(Comparators.unchanged);
+    });
+  });
+
   describe('ofOrder', () => {
     it('should use the specified order', () => {
       const comparator = Comparators.ofOrder(['b', 'a', 'c']);
