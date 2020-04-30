@@ -1,6 +1,15 @@
-# Changelog
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+## [1.0.0-rc.0](https://github.com/JanMalch/comparing/compare/v0.0.3...v1.0.0-rc.0) (2020-04-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* Comparators.forDirection and SortDirection have been removed
+
+### Features
+
+* add a more reusable forDirections comparator ([d4d31ea](https://github.com/JanMalch/comparing/commit/d4d31ea85d77c7eade4605267d3e840d24574a99))
+* add Comparators.forDirection ([c3320b5](https://github.com/JanMalch/comparing/commit/c3320b56efe7084e8bac6ce78a330a83cfc1279e))
 
 ### [0.0.3](https://github.com/JanMalch/comparing/compare/v0.0.2...v0.0.3) (2020-01-23)
 
