@@ -1,4 +1,4 @@
-import { Comparator, CompareFunction, SortDirection } from './types';
+import { Comparator, CompareFunction } from './types';
 
 /**
  * Common Comparators and utilites to construct them.
@@ -60,10 +60,7 @@ export class Comparators {
    * @see [[Comparators.localeCompare]]
    */
   static readonly ignoreCase: Comparator<any> = Comparators.of((a: any, b: any) =>
-    a
-      .toString()
-      .toLowerCase()
-      .localeCompare(b.toString().toLowerCase())
+    a.toString().toLowerCase().localeCompare(b.toString().toLowerCase())
   );
 
   /**
@@ -173,30 +170,38 @@ export class Comparators {
   }
 
   /**
-   * Returns one of the following default comparators based on the given direction:
+   * Returns a factory that will return the appropriate comparator based on the given direction.
    *
-   * - `Comparators.naturalOrder` for `'asc'` or `'ascending'`
-   * - `Comparators.reversedOrder` for `'desc'` or `'descending'`
-   * - otherwise `Comparators.unchanged`
-   * @param direction the desired direction
+   * If the given `direction` matches
+   * - the `ascendingIndicator`, the `Comparators.naturalOrder` will be returned.
+   * - the `descendingIndicator`, the `Comparators.reversedOrder` will be returned.
+   * - none of them, the `Comparators.unchanged` will be returned.
+   *
+   * @param ascendingIndicator the value that indicates using the natural order
+   * @param descendingIndicator the value that indicates using the reversed order
    * @example
+   * // create comparator once
+   * const myDirectionComparator = Comparators.forDirections('asc', 'desc');
+   * // reuse it when sorting the data
    * const { active, direction } = mySort.state;
    * const sortedData = data.sort(Comparators.with(
    *   x => x[active],
-   *   Comparators.forDirection(direction)
+   *   myDirectionComparator(direction)
    * ));
    */
-  static forDirection<T>(direction?: SortDirection): Comparator<T> {
-    switch (direction) {
-      case 'asc':
-      case 'ascending':
+  static forDirections<A, D>(
+    ascendingIndicator: A,
+    descendingIndicator: D
+  ): <T>(direction: A | D | unknown) => Comparator<T> {
+    return <T>(direction: A | D | unknown): Comparator<T> => {
+      if (direction === ascendingIndicator) {
         return Comparators.naturalOrder;
-      case 'desc':
-      case 'descending':
+      } else if (direction === descendingIndicator) {
         return Comparators.reversedOrder;
-      default:
+      } else {
         return Comparators.unchanged;
-    }
+      }
+    };
   }
 
   /**
@@ -230,7 +235,7 @@ export class Comparators {
    * Comparators.of<number>((a, b) => b - a).reversed();
    */
   static of<T>(comparator: CompareFunction<T>): Comparator<T> {
-    (comparator as Comparator<T>).then = function(subsequent: CompareFunction<T>) {
+    (comparator as Comparator<T>).then = function (subsequent: CompareFunction<T>) {
       return Comparators.of((a, b) => {
         const firstComp = comparator(a, b);
         if (firstComp !== 0) {
@@ -240,7 +245,7 @@ export class Comparators {
         }
       });
     };
-    (comparator as Comparator<T>).reversed = function() {
+    (comparator as Comparator<T>).reversed = function () {
       return Comparators.reverse(this);
     };
     return comparator as Comparator<T>;

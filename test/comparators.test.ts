@@ -59,7 +59,7 @@ describe('Comparators', () => {
       const expected = FIRST_AFTER_SECOND;
       // tslint:disable-next-line:completed-docs
       const comparator = Comparators.with<{ id: string }, string>(
-        x => x.id,
+        (x) => x.id,
         Comparators.ignoreCase
       );
       const actual = comparator({ id: 'b' }, { id: 'a' });
@@ -69,14 +69,14 @@ describe('Comparators', () => {
     it('should default to lessThan comparator', () => {
       const expected = FIRST_AFTER_SECOND;
       // tslint:disable-next-line:completed-docs
-      const comparator = Comparators.with<{ value: number }, number>(x => x.value % 2);
+      const comparator = Comparators.with<{ value: number }, number>((x) => x.value % 2);
       const actual = comparator({ value: 1 }, { value: 2 });
       expect(actual).toBe(expected);
     });
 
     it('should work on primitives', () => {
       const expected = FIRST_AFTER_SECOND;
-      const comparator = Comparators.with<number, number>(x => x % 2);
+      const comparator = Comparators.with<number, number>((x) => x % 2);
       const actual = comparator(1, 2);
       expect(actual).toBe(expected);
     });
@@ -95,7 +95,7 @@ describe('Comparators', () => {
       const someCondition = false;
       const composed = Comparators.compose([
         someCondition ? Comparators.byLength : undefined,
-        Comparators.ignoreCase
+        Comparators.ignoreCase,
       ]);
 
       expect(composed('BA', 'B')).toBe(FIRST_AFTER_SECOND);
@@ -156,21 +156,21 @@ describe('Comparators', () => {
         { id: 0, foo: null },
         { id: 3, foo: 1 },
         { id: 1, foo: 1 },
-        { id: 2, foo: null }
+        { id: 2, foo: null },
       ];
       const actual = input.sort(
         // tslint:disable-next-line:completed-docs
         Comparators.with<{ id: number; foo: number | null }, any>(
-          x => x.foo,
+          (x) => x.foo,
           Comparators.nullFirst
-        ).then(Comparators.with(x => x.id))
+        ).then(Comparators.with((x) => x.id))
       );
 
       const expected = [
         { id: 0, foo: null },
         { id: 2, foo: null },
         { id: 1, foo: 1 },
-        { id: 3, foo: 1 }
+        { id: 3, foo: 1 },
       ];
       expect(actual).toEqual(expected);
     });
@@ -206,20 +206,21 @@ describe('Comparators', () => {
         { id: 0, foo: true },
         { id: 3, foo: false },
         { id: 1, foo: false },
-        { id: 2, foo: true }
+        { id: 2, foo: true },
       ];
       const actual = input.sort(
         // tslint:disable-next-line:completed-docs
-        Comparators.with<{ id: number; foo: boolean }, any>(x => x.foo, Comparators.trueFirst).then(
-          Comparators.with(x => x.id)
-        )
+        Comparators.with<{ id: number; foo: boolean }, any>(
+          (x) => x.foo,
+          Comparators.trueFirst
+        ).then(Comparators.with((x) => x.id))
       );
 
       const expected = [
         { id: 0, foo: true },
         { id: 2, foo: true },
         { id: 1, foo: false },
-        { id: 3, foo: false }
+        { id: 3, foo: false },
       ];
       expect(actual).toEqual(expected);
     });
@@ -283,20 +284,19 @@ describe('Comparators', () => {
     });
   });
 
-  describe('forDirection', () => {
+  describe('forDirections', () => {
+    const directionComparator = Comparators.forDirections('asc', 'desc');
+
     it('should return Comparators.naturalOrder for ascending', () => {
-      expect(Comparators.forDirection('asc')).toBe(Comparators.naturalOrder);
-      expect(Comparators.forDirection('ascending')).toBe(Comparators.naturalOrder);
+      expect(directionComparator('asc')).toBe(Comparators.naturalOrder);
     });
     it('should return Comparators.reversedOrder for descending', () => {
-      expect(Comparators.forDirection('desc')).toBe(Comparators.reversedOrder);
-      expect(Comparators.forDirection('descending')).toBe(Comparators.reversedOrder);
+      expect(directionComparator('desc')).toBe(Comparators.reversedOrder);
     });
     it('should return Comparators.unchanged for other values', () => {
-      expect(Comparators.forDirection('')).toBe(Comparators.unchanged);
-      expect(Comparators.forDirection(null)).toBe(Comparators.unchanged);
-      expect(Comparators.forDirection(undefined)).toBe(Comparators.unchanged);
-      expect(Comparators.forDirection()).toBe(Comparators.unchanged);
+      expect(directionComparator('')).toBe(Comparators.unchanged);
+      expect(directionComparator(null)).toBe(Comparators.unchanged);
+      expect(directionComparator(undefined)).toBe(Comparators.unchanged);
     });
   });
 
@@ -317,7 +317,7 @@ describe('Comparators', () => {
     it('should be useful or ordering by arbitrary type', () => {
       enum MyType {
         Foo = 'Foo',
-        Bar = 'Bar'
+        Bar = 'Bar',
       }
 
       interface MyData {
@@ -334,14 +334,14 @@ describe('Comparators', () => {
         { id: 3, type: MyType.Foo },
         { id: 5, type: null },
         { id: 4, type: MyType.Bar },
-        { id: 2, type: MyType.Foo }
+        { id: 2, type: MyType.Foo },
       ].sort(comparator);
       const expected = [
         { id: 1, type: MyType.Bar },
         { id: 4, type: MyType.Bar },
         { id: 2, type: MyType.Foo },
         { id: 3, type: MyType.Foo },
-        { id: 5, type: null }
+        { id: 5, type: null },
       ];
       expect(actual).toEqual(expected);
     });
