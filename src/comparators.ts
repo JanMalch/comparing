@@ -139,10 +139,10 @@ export class Comparators {
   });
 
   /**
-   * Compares two values based on the respective value, extracted by the given function.
+   * Compares two values based on the respective value, that was extracted by the given function.
    * By default the `naturalOrder` comparator will be used.
-   * @param selector the function used to extract the sort value, defaults to `naturalOrder`
-   * @param comparator comparator function to
+   * @param selector function to extract the comparable value
+   * @param comparator comparator for the extracted values, defaults to `naturalOrder`
    * @typeparam T type of the values to compare
    * @typeparam O type of the extracted value to compare by
    * @example
@@ -179,6 +179,8 @@ export class Comparators {
    *
    * @param ascendingIndicator the value that indicates using the natural order
    * @param descendingIndicator the value that indicates using the reversed order
+   * @typeparam A type of the ascendingIndicator
+   * @typeparam D type of the descendingIndicator
    * @example
    * // create comparator once
    * const myDirectionComparator = Comparators.forDirections('asc', 'desc');
