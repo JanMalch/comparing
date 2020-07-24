@@ -56,39 +56,35 @@ describe('Comparators', () => {
 
   describe('with', () => {
     it('should apply comparator to given field', () => {
-      const expected = FIRST_AFTER_SECOND;
       // tslint:disable-next-line:completed-docs
       const comparator = Comparators.with<{ id: string }, string>(
         (x) => x.id,
         Comparators.ignoreCase
       );
       const actual = comparator({ id: 'b' }, { id: 'a' });
-      expect(actual).toBe(expected);
+      expect(actual).toBe(FIRST_AFTER_SECOND);
     });
 
     it('should default to lessThan comparator', () => {
-      const expected = FIRST_AFTER_SECOND;
       // tslint:disable-next-line:completed-docs
       const comparator = Comparators.with<{ value: number }, number>((x) => x.value % 2);
       const actual = comparator({ value: 1 }, { value: 2 });
-      expect(actual).toBe(expected);
+      expect(actual).toBe(FIRST_AFTER_SECOND);
     });
 
     it('should work on primitives', () => {
-      const expected = FIRST_AFTER_SECOND;
       const comparator = Comparators.with<number, number>((x) => x % 2);
       const actual = comparator(1, 2);
-      expect(actual).toBe(expected);
+      expect(actual).toBe(FIRST_AFTER_SECOND);
     });
   });
 
   describe('compose', () => {
     it('should compare by chaining comparators', () => {
-      const expected = FIRST_AFTER_SECOND;
       const composed = Comparators.compose([Comparators.byLength, Comparators.ignoreCase]);
 
-      expect(composed('BA', 'B')).toBe(expected);
-      expect(composed('BB', 'AA')).toBe(expected);
+      expect(composed('BA', 'B')).toBe(FIRST_AFTER_SECOND);
+      expect(composed('BB', 'AA')).toBe(FIRST_AFTER_SECOND);
     });
 
     it('should work with optional comparator', () => {
@@ -104,35 +100,28 @@ describe('Comparators', () => {
 
   describe('byLength', () => {
     it('should compare for strings', () => {
-      const expected = FIRST_AFTER_SECOND;
       const comparator = Comparators.byLength;
-      expect(comparator('BA', 'B')).toBe(expected);
+      expect(comparator('BA', 'B')).toBe(FIRST_AFTER_SECOND);
     });
 
     it('should compare for arrays', () => {
-      const expected = FIRST_AFTER_SECOND;
       const comparator = Comparators.byLength;
-      expect(comparator([1, 2, 3], [1, 2])).toBe(expected);
+      expect(comparator([1, 2, 3], [1, 2])).toBe(FIRST_AFTER_SECOND);
     });
   });
 
   describe('unchanged', () => {
     it('should invert the result', () => {
-      const expected = [2, 1, 3];
-      const actual = [2, 1, 3].sort(Comparators.unchanged);
-      const natural = [2, 1, 3].sort(); // not the same as unchanged!
-      const withUndefined = [2, 1, 3].sort(undefined); // not the same as unchanged!
-      expect(actual).toEqual(expected);
-      expect(actual).not.toEqual(natural);
-      expect(actual).not.toEqual(withUndefined);
+      expect([2, 1, 3]).toEqual([2, 1, 3].sort(Comparators.unchanged));
+      expect([2, 1, 3]).not.toEqual([2, 1, 3].sort());
+      expect([2, 1, 3]).not.toEqual([2, 1, 3].sort(undefined));
     });
   });
 
   describe('reverse', () => {
     it('should invert the result', () => {
-      const expected = FIRST_AFTER_SECOND;
       const comparator = Comparators.reverse(Comparators.lessThan);
-      expect(comparator(1, 2)).toBe(expected);
+      expect(comparator(1, 2)).toBe(FIRST_AFTER_SECOND);
     });
   });
 
