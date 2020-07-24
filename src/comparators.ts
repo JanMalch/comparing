@@ -139,8 +139,8 @@ export class Comparators {
   });
 
   /**
-   * Compares two values based on the respective value, that was extracted by the given function.
-   * By default the `naturalOrder` comparator will be used.
+   * Creates a comparator that compares two values of type `T`, based on the selected value of type `O` and the given comparator.
+   * If no comparator is passed, the `naturalOrder` comparator will be used.
    * @param selector function to extract the comparable value
    * @param comparator comparator for the extracted values, defaults to `naturalOrder`
    * @typeparam T type of the values to compare
