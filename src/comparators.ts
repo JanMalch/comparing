@@ -173,17 +173,20 @@ export class Comparators {
    * Returns a factory that will return the appropriate comparator based on the given direction.
    *
    * If the given `direction` matches
-   * - the `ascendingIndicator`, the `Comparators.naturalOrder` will be returned.
-   * - the `descendingIndicator`, the `Comparators.reversedOrder` will be returned.
+   * - the `ascendingIndicator`, the given `ascendingComparator` (defaults to `Comparators.naturalOrder`) will be returned.
+   * - the `descendingIndicator`, the given `descendingComparator` (defaults to `ascendingComparator.reversed()`) will be returned.
    * - none of them, the `Comparators.unchanged` will be returned.
    *
-   * @param ascendingIndicator the value that indicates using the natural order
-   * @param descendingIndicator the value that indicates using the reversed order
+   * @param ascendingIndicator the value that indicates using the `ascendingComparator`
+   * @param descendingIndicator the value that indicates using the `descendingComparator`
+   * @param ascendingComparator the comparator to return when direction is ascending, defaults to `Comparators.naturalOrder`
+   * @param descendingComparator the comparator to return when direction is descending, defaults to `ascendingComparator.reversed()`
    * @typeparam A type of the ascendingIndicator
    * @typeparam D type of the descendingIndicator
+   * @typeparam T type of the items to compare
    * @example
    * // create comparator once
-   * const myDirectionComparator = Comparators.forDirections('asc', 'desc');
+   * const myDirectionComparator = Comparators.forDirections('asc', 'desc', Comparators.ignoreCase);
    * // reuse it when sorting the data
    * const { active, direction } = mySort.state;
    * const sortedData = data.sort(Comparators.with(
@@ -191,15 +194,17 @@ export class Comparators {
    *   myDirectionComparator(direction)
    * ));
    */
-  static forDirections<A, D>(
+  static forDirections<A, D, T>(
     ascendingIndicator: A,
-    descendingIndicator: D
-  ): <T>(direction: A | D | unknown) => Comparator<T> {
-    return <T>(direction: A | D | unknown): Comparator<T> => {
+    descendingIndicator: D,
+    ascendingComparator: Comparator<T> = Comparators.naturalOrder,
+    descendingComparator: Comparator<T> = ascendingComparator.reversed()
+  ): (direction: A | D | unknown) => Comparator<T> {
+    return (direction: A | D | unknown): Comparator<T> => {
       if (direction === ascendingIndicator) {
-        return Comparators.naturalOrder;
+        return ascendingComparator;
       } else if (direction === descendingIndicator) {
-        return Comparators.reversedOrder;
+        return descendingComparator;
       } else {
         return Comparators.unchanged;
       }
