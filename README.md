@@ -1,8 +1,9 @@
-
 # comparing  <a href="https://www.github.com/JanMalch/comparing"><img src="https://raw.githubusercontent.com/JanMalch/comparing/master/.github/assets/logo.png" width="90" height="90" align="right"></a>  
   
-[![Docs](https://img.shields.io/badge/completed--docs-true-brightgreen)][docs-url] [![npm](https://badge.fury.io/js/comparing.svg)][npm-url] [![Travis-CI](https://travis-ci.org/JanMalch/comparing.svg?branch=master)][build-url] 
+[![npm](https://badge.fury.io/js/comparing.svg)][npm-url]
+[![Travis-CI](https://travis-ci.org/JanMalch/comparing.svg?branch=master)][build-url] 
 [![codecov](https://codecov.io/gh/JanMalch/comparing/branch/master/graph/badge.svg)][codecov-url]
+[![minified + gzip](https://badgen.net/bundlephobia/minzip/comparing)][bundlephobia-url]
   
 <i>Easily create descriptive comparators.</i>    
   
@@ -14,11 +15,9 @@
 - chain or reverse your own custom Comparators  
 - define custom orders for enums or other arbitrary value sets
 - single [`Comparators` class](http://janmalch.github.io/comparing/classes/comparators.html#bylength) as a common namespace  
-- lightweight, only [~700 bytes](https://bundlephobia.com/result?p=comparing) gzipped   
+- lightweight, only [739 bytes](https://bundlephobia.com/result?p=comparing) gzipped   
   
-Make sure to checkout the [complete docs][docs-url].   
-  
-[![Docs](https://img.shields.io/badge/docs%20coverage-100%25-brightgreen)][docs-url]  
+Make sure to checkout the [complete documentation][docs-url].     
   
 ## Installation & Usage  
   
@@ -54,4 +53,5 @@ const dataComparator = Comparators.with(data => data.type, myEnumComparator);
 [docs-url]: https://janmalch.github.io/comparing/  
 [npm-url]: https://www.npmjs.com/package/comparing  
 [build-url]: https://travis-ci.org/JanMalch/comparing  
-[codecov-url]:https://codecov.io/gh/JanMalch/comparing
+[codecov-url]: https://codecov.io/gh/JanMalch/comparing
+[bundlephobia-url]: https://bundlephobia.com/result?p=comparing
