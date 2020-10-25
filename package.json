@@ -42,7 +42,8 @@
     "test": "jest --coverage",
     "test:prod": "npm run lint && npm run test -- --no-cache",
     "ci": "npm run test:prod && npm run build",
-    "release": "standard-version"
+    "release": "standard-version",
+    "prettier": "prettier --write **/*.ts"
   },
   "jest": {
     "transform": {
