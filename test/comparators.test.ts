@@ -273,40 +273,6 @@ describe('Comparators', () => {
     });
   });
 
-  describe('forDirections', () => {
-    const directionComparator = Comparators.forDirections('asc', 'desc');
-    const directionIgnoreCaseCmp = Comparators.forDirections('asc', 'desc', Comparators.ignoreCase);
-
-    it('should return Comparators.naturalOrder for ascending by default', () => {
-      expect(directionComparator('asc')).toBe(Comparators.naturalOrder);
-    });
-    it('should return not return Comparators.naturalOrder for descending', () => {
-      expect(directionComparator('desc')).not.toBe(Comparators.naturalOrder);
-    });
-    it('should return the specified comparator for ascending', () => {
-      expect(directionIgnoreCaseCmp('asc')).toBe(Comparators.ignoreCase);
-    });
-    it('should return the specified comparator for descending', () => {
-      const revIgnoreCase = Comparators.ignoreCase.reversed();
-      expect(
-        Comparators.forDirections('asc', 'desc', Comparators.ignoreCase, revIgnoreCase)('desc')
-      ).toBe(revIgnoreCase);
-    });
-    it('should reverse the specified ascending comparator for descending, if no descending comparator is given', () => {
-      expect(directionIgnoreCaseCmp('asc')('a', 'b')).toBe(-1);
-      expect(directionIgnoreCaseCmp('desc')('a', 'b')).toBe(1);
-    });
-    it('should return Comparators.unchanged for other values', () => {
-      expect(directionComparator('')).toBe(Comparators.unchanged);
-      expect(directionComparator(null)).toBe(Comparators.unchanged);
-      expect(directionComparator(undefined)).toBe(Comparators.unchanged);
-
-      expect(directionIgnoreCaseCmp('')).toBe(Comparators.unchanged);
-      expect(directionIgnoreCaseCmp(null)).toBe(Comparators.unchanged);
-      expect(directionIgnoreCaseCmp(undefined)).toBe(Comparators.unchanged);
-    });
-  });
-
   describe('ofOrder', () => {
     it('should use the specified order', () => {
       const comparator = Comparators.ofOrder(['b', 'a', 'c']);
