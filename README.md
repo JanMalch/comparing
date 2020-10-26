@@ -10,45 +10,51 @@
 ## Features
 
 - predefined Comparators for common use-cases
-- easily sort arrays of objects via [`Comparators.with`](http://janmalch.github.io/comparing/classes/comparators.html#with)
-- easily combine predefined and custom Comparators
-- chain or reverse your own custom Comparators
-- define custom orders for enums or other arbitrary value sets
-- single [`Comparators` class](http://janmalch.github.io/comparing/classes/comparators.html#bylength) as a common namespace
-- lightweight, only [739 bytes](https://bundlephobia.com/result?p=comparing) gzipped
+- lightweight
+- easily sort arrays of objects via [`compareBy`](http://janmalch.github.io/comparing/#compareby)
+- [compose](http://janmalch.github.io/comparing/#composecomparators) or [reverse](http://janmalch.github.io/comparing/#reverse) predefined and custom Comparators
+- define custom [orders for enums](http://janmalch.github.io/comparing/#comparatorfororder) or other arbitrary value sets
 
-Make sure to checkout the [complete documentation][docs-url].
+Make sure to checkout the [documentation][docs-url].
 
-## Installation & Usage
+## Installation
 
 ```bash
 npm i comparing
 ```
 
-All functionality is contained in the [`Comparators` class](http://janmalch.github.io/comparing/classes/comparators.html#bylength).
+## Usage
 
 ```typescript
-import { Comparators, CompareFunction, Comparator } from 'comparing';
+import {
+  naturalOrder,
+  reverse,
+  composeComparators,
+  ignoreCase,
+  compareBy,
+  comparatorOfOrder,
+  Comparator,
+} from 'comparing';
 
 // chose from various available Comparators
-const simple = [4, 1, 3, 5].sort(Comparators.naturalOrder);
+const simple = [4, 1, 3, 5].sort(naturalOrder);
 expect(simple).toEqual([1, 3, 4, 5]);
 
 // start with your own simple function
-const myCompareFn: CompareFunction<string> = (a, b) => a.charCodeAt(0) - b.charCodeAt(0);
-// add `reversed` and `then` to any function with Comparators.of
-const complex: Comparator<string> = Comparators.of(myCompareFn)
-  .reversed() // reverse any Comparator
-  .then(
-    // compare by a certain field or other values via `Comparators.with`
-    Comparators.with((x) => x.charAt(1), Comparators.ignoreCase)
-  );
+const myCompareFn: Comparator<string> = (a, b) => a.charCodeAt(0) - b.charCodeAt(0);
+// create "then ..." comparisons with compose
+const complex: Comparator<string> = composeComparators([
+  // reverse any comparator
+  reverse(myCompareFn),
+  // compare by a certain field or other values via `compareBy`
+  compareBy((x) => x.charAt(1), ignoreCase),
+]);
 const result = ['aB', 'bB', 'aa'].sort(complex);
 expect(result).toEqual(['bB', 'aa', 'aB']);
 
 // define your own order for known values
-const myEnumComparator = Comparators.ofOrder([MyEnum.C, MyEnum.A, MyEnum.B]);
-const dataComparator = Comparators.with((data) => data.type, myEnumComparator);
+const myEnumComparator = comparatorForOrder([MyEnum.C, MyEnum.A, MyEnum.B]);
+const myDataComparator = compareBy((data) => data.type, myEnumComparator);
 ```
 
 [docs-url]: https://janmalch.github.io/comparing/
