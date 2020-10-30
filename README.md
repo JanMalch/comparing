@@ -1,6 +1,6 @@
 # comparing <a href="https://www.github.com/JanMalch/comparing"><img src="https://raw.githubusercontent.com/JanMalch/comparing/master/.github/assets/logo.png" width="90" height="90" align="right"></a>
 
-[![npm](https://badge.fury.io/js/comparing.svg)][npm-url]
+[![npm](https://img.shields.io/npm/v/comparing)][npm-url]
 [![Build](https://github.com/JanMalch/comparing/workflows/Build/badge.svg)][build-url]
 [![codecov](https://codecov.io/gh/JanMalch/comparing/branch/master/graph/badge.svg)][codecov-url]
 [![minified + gzip](https://badgen.net/bundlephobia/minzip/comparing)][bundlephobia-url]
