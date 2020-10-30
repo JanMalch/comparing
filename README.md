@@ -1,7 +1,7 @@
 # comparing <a href="https://www.github.com/JanMalch/comparing"><img src="https://raw.githubusercontent.com/JanMalch/comparing/master/.github/assets/logo.png" width="90" height="90" align="right"></a>
 
 [![npm](https://badge.fury.io/js/comparing.svg)][npm-url]
-[![Travis-CI](https://travis-ci.org/JanMalch/comparing.svg?branch=master)][build-url]
+[![Build](https://github.com/JanMalch/comparing/workflows/Build/badge.svg)][build-url]
 [![codecov](https://codecov.io/gh/JanMalch/comparing/branch/master/graph/badge.svg)][codecov-url]
 [![minified + gzip](https://badgen.net/bundlephobia/minzip/comparing)][bundlephobia-url]
 
@@ -59,6 +59,6 @@ const myDataComparator = compareBy((data) => data.type, myEnumComparator);
 
 [docs-url]: https://janmalch.github.io/comparing/
 [npm-url]: https://www.npmjs.com/package/comparing
-[build-url]: https://travis-ci.org/JanMalch/comparing
+[build-url]: https://github.com/JanMalch/comparing/actions?query=workflow%3ABuild
 [codecov-url]: https://codecov.io/gh/JanMalch/comparing
 [bundlephobia-url]: https://bundlephobia.com/result?p=comparing
