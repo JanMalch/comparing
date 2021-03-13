@@ -195,6 +195,13 @@ describe('trueFirst', () => {
     ];
     expect(actual).toEqual(expected);
   });
+
+  it('can be used with compareBy to handle truthy values', () => {
+    const truthyFirst = compareBy((x) => !!x, trueFirst);
+    const actual = ['hi', 0, 'hello', '', false, true, 'hi', 'hey', ''].sort(truthyFirst);
+    const expected = ['hi', 'hello', true, 'hi', 'hey', 0, '', false, ''];
+    expect(actual).toEqual(expected);
+  });
 });
 
 describe('trueLast', () => {
