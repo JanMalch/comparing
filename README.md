@@ -12,7 +12,7 @@
 - predefined Comparators for common use-cases
 - lightweight
 - easily sort arrays of objects via [`compareBy`](http://janmalch.github.io/comparing/#compareby)
-- [compose](http://janmalch.github.io/comparing/#composecomparators) or [reverse](http://janmalch.github.io/comparing/#reverse) predefined and custom Comparators
+- [compose](http://janmalch.github.io/comparing/#composecomparators) or [reverse](http://janmalch.github.io/comparing/#reversecomparator) predefined and custom Comparators
 - define custom [orders for enums](http://janmalch.github.io/comparing/#comparatorfororder) or other arbitrary value sets
 
 Make sure to checkout the [documentation][docs-url].
@@ -28,7 +28,7 @@ npm i comparing
 ```typescript
 import {
   naturalOrder,
-  reverse,
+  reverseComparator,
   composeComparators,
   ignoreCase,
   compareBy,
@@ -45,7 +45,7 @@ const myCompareFn: Comparator<string> = (a, b) => a.charCodeAt(0) - b.charCodeAt
 // create "then ..." comparisons with compose
 const complex: Comparator<string> = composeComparators([
   // reverse any comparator
-  reverse(myCompareFn),
+  reverseComparator(myCompareFn),
   // compare by a certain field or other values via `compareBy`
   compareBy((x) => x.charAt(1), ignoreCase),
 ]);

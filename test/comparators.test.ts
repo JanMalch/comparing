@@ -102,7 +102,7 @@ describe('unchanged', () => {
   });
 });
 
-describe('reverse', () => {
+describe('reverseComparator', () => {
   it('should invert the result', () => {
     const comparator = reverseComparator(naturalOrder);
     expect(comparator(1, 2)).toBe(FIRST_AFTER_SECOND);
