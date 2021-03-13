@@ -114,7 +114,7 @@
 				<li>predefined Comparators for common use-cases</li>
 				<li>lightweight</li>
 				<li>easily sort arrays of objects via <a href="http://janmalch.github.io/comparing/#compareby"><code>compareBy</code></a></li>
-				<li><a href="http://janmalch.github.io/comparing/#composecomparators">compose</a> or <a href="http://janmalch.github.io/comparing/#reverse">reverse</a> predefined and custom Comparators</li>
+				<li><a href="http://janmalch.github.io/comparing/#composecomparators">compose</a> or <a href="http://janmalch.github.io/comparing/#reversecomparator">reverse</a> predefined and custom Comparators</li>
 				<li>define custom <a href="http://janmalch.github.io/comparing/#comparatorfororder">orders for enums</a> or other arbitrary value sets</li>
 			</ul>
 			<p>Make sure to checkout the <a href="https://janmalch.github.io/comparing/">documentation</a>.</p>
@@ -127,7 +127,7 @@
 			</a>
 			<pre><code class="language-typescript"><span class="hljs-keyword">import</span> {
   naturalOrder,
-  reverse,
+  reverseComparator,
   composeComparators,
   ignoreCase,
   compareBy,
@@ -144,7 +144,7 @@ expect(simple).toEqual([<span class="hljs-number">1</span>, <span class="hljs-nu
 <span class="hljs-comment">// create &quot;then ...&quot; comparisons with compose</span>
 <span class="hljs-keyword">const</span> complex: Comparator&lt;<span class="hljs-built_in">string</span>&gt; = composeComparators([
   <span class="hljs-comment">// reverse any comparator</span>
-  reverse(myCompareFn),
+  reverseComparator(myCompareFn),
   <span class="hljs-comment">// compare by a certain field or other values via `compareBy`</span>
   compareBy(<span class="hljs-function">(<span class="hljs-params">x</span>) =&gt;</span> x.charAt(<span class="hljs-number">1</span>), ignoreCase),
 ]);
@@ -197,7 +197,7 @@ expect(result).toEqual([<span class="hljs-string">&#x27;bB&#x27;</span>, <span c
 				<div class="tsd-signature tsd-kind-icon">Comparator&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>a<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span>, b<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/a14a63b/src/types.ts#L4">types.ts:4</a></li>
+						<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/132fd04/src/types.ts#L4">types.ts:4</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -249,13 +249,19 @@ expect(result).toEqual([<span class="hljs-string">&#x27;bB&#x27;</span>, <span c
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/a14a63b/src/comparators.ts#L60">comparators.ts:60</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/132fd04/src/comparators.ts#L66">comparators.ts:66</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Compares two values by their <code>length</code> property.</p>
+								<p>Compares two values by their <code>length</code> property.
+								Puts the value with the shorter length first.</p>
 							</div>
+							<dl class="tsd-comment-tags">
+								<dt>example</dt>
+								<dd><p>[&#39;abc&#39;, &#39;a&#39;, &#39;ab&#39;].sort(byLength) == [&#39;a&#39;, &#39;ab&#39;, &#39;abc&#39;]</p>
+								</dd>
+							</dl>
 						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
@@ -300,13 +306,20 @@ expect(result).toEqual([<span class="hljs-string">&#x27;bB&#x27;</span>, <span c
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/a14a63b/src/comparators.ts#L67">comparators.ts:67</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/132fd04/src/comparators.ts#L77">comparators.ts:77</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Compares two values by their <code>size</code> property.</p>
+								<p>Compares two values by their <code>size</code> property.
+								Puts the value with the smaller size first.</p>
 							</div>
+							<dl class="tsd-comment-tags">
+								<dt>example</dt>
+								<dd><p>[new Set([0, 1, 2]), new Set([0]), new Set([0, 1])].sort(bySize)
+									== [new Set([0]), new Set([0, 1]), new Set([0, 1, 2])]</p>
+								</dd>
+							</dl>
 						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
@@ -351,7 +364,7 @@ expect(result).toEqual([<span class="hljs-string">&#x27;bB&#x27;</span>, <span c
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/a14a63b/src/factories.ts#L28">factories.ts:28</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/132fd04/src/factories.ts#L28">factories.ts:28</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -395,7 +408,7 @@ expect(result).toEqual([<span class="hljs-string">&#x27;bB&#x27;</span>, <span c
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/a14a63b/src/factories.ts#L13">factories.ts:13</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/132fd04/src/factories.ts#L13">factories.ts:13</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -466,7 +479,7 @@ expect(result).toEqual([<span class="hljs-string">&#x27;bB&#x27;</span>, <span c
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/a14a63b/src/factories.ts#L63">factories.ts:63</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/132fd04/src/factories.ts#L63">factories.ts:63</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -512,7 +525,7 @@ expect(result).toEqual([<span class="hljs-string">&#x27;bB&#x27;</span>, <span c
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/a14a63b/src/comparators.ts#L44">comparators.ts:44</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/132fd04/src/comparators.ts#L47">comparators.ts:47</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -562,7 +575,7 @@ expect(result).toEqual([<span class="hljs-string">&#x27;bB&#x27;</span>, <span c
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/a14a63b/src/comparators.ts#L53">comparators.ts:53</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/132fd04/src/comparators.ts#L56">comparators.ts:56</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -608,18 +621,19 @@ expect(result).toEqual([<span class="hljs-string">&#x27;bB&#x27;</span>, <span c
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/a14a63b/src/comparators.ts#L19">comparators.ts:19</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/132fd04/src/comparators.ts#L20">comparators.ts:20</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Returns the comparator
-									Compares the values <code>a</code> and <code>b</code> by their natural order via the <code>&lt;</code> operator.
+								<p>Compares the values <code>a</code> and <code>b</code> by their natural order via the <code>&lt;</code> operator.
 								Returns <code>0</code> if the values are strictly equal.</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>example</dt>
-								<dd><p>naturalOrder(-1, 1) === -1;
+								<dd><p>// ascending
+										[0, 3, 5, 1, 2, 4].sort(naturalOrder) == [0, 1, 2, 3, 4, 5]
+										naturalOrder(-1, 1) === -1;
 										naturalOrder(&quot;AA&quot;, &quot;B&quot;) === -1; // alphabetical for strings
 									naturalOrder(&quot;A&quot;, &quot;a&quot;) === -1; // alphabetical for strings</p>
 								</dd>
@@ -658,12 +672,13 @@ expect(result).toEqual([<span class="hljs-string">&#x27;bB&#x27;</span>, <span c
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/a14a63b/src/comparators.ts#L75">comparators.ts:75</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/132fd04/src/comparators.ts#L86">comparators.ts:86</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Compares two values and puts <code>null</code> and <code>undefined</code> first.</p>
+								<p>Compares two values and puts <code>null</code> and <code>undefined</code> first.
+								Returns <code>0</code> if both values are null-ish or not null-ish.</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>see</dt>
@@ -704,12 +719,13 @@ expect(result).toEqual([<span class="hljs-string">&#x27;bB&#x27;</span>, <span c
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/a14a63b/src/comparators.ts#L92">comparators.ts:92</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/132fd04/src/comparators.ts#L104">comparators.ts:104</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Compares two values and puts <code>null</code> and <code>undefined</code> last.</p>
+								<p>Compares two values and puts <code>null</code> and <code>undefined</code> last.
+								Returns <code>0</code> if both values are null-ish or not null-ish.</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>see</dt>
@@ -750,7 +766,7 @@ expect(result).toEqual([<span class="hljs-string">&#x27;bB&#x27;</span>, <span c
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/a14a63b/src/factories.ts#L48">factories.ts:48</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/132fd04/src/factories.ts#L48">factories.ts:48</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -787,21 +803,23 @@ expect(result).toEqual([<span class="hljs-string">&#x27;bB&#x27;</span>, <span c
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/a14a63b/src/comparators.ts#L33">comparators.ts:33</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/132fd04/src/comparators.ts#L36">comparators.ts:36</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Compares the values <code>a</code> and <code>b</code> by their natural reversed order.
+								<p>Compares the values <code>a</code> and <code>b</code> by their natural reversed order via the <code>&gt;</code> operator.
 								Returns <code>0</code> if the values are strictly equal.</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>example</dt>
-								<dd><p>reversedOrder(-1, 1) === -1;
-										reversedOrder(&quot;AA&quot;, &quot;B&quot;) === -1; // alphabetical for strings
-										reversedOrder(&quot;A&quot;, &quot;a&quot;) === -1; // alphabetical for strings
+								<dd><p>// descending
+										[0, 3, 5, 1, 2, 4].sort(reversedOrder) == [5, 4, 3, 2, 1, 0]
+										reversedOrder(-1, 1) === 1;
+										reversedOrder(&quot;AA&quot;, &quot;B&quot;) === 1; // alphabetical for strings
+										reversedOrder(&quot;A&quot;, &quot;a&quot;) === 1; // alphabetical for strings
 										reversedOrder(0, 0) === 0;
-									reversedOrder(0, &quot;0&quot;) === -1;</p>
+									reversedOrder(0, &quot;0&quot;) === 1;</p>
 								</dd>
 							</dl>
 						</div>
@@ -838,7 +856,7 @@ expect(result).toEqual([<span class="hljs-string">&#x27;bB&#x27;</span>, <span c
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/a14a63b/src/comparators.ts#L109">comparators.ts:109</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/132fd04/src/comparators.ts#L124">comparators.ts:124</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -848,6 +866,10 @@ expect(result).toEqual([<span class="hljs-string">&#x27;bB&#x27;</span>, <span c
 							<dl class="tsd-comment-tags">
 								<dt>see</dt>
 								<dd><p>trueLast</p>
+								</dd>
+								<dt>example</dt>
+								<dd><p>// use compareBy to broaden to truthy and falsy values
+									const truthyFirst = compareBy(x =&gt; !!x, trueFirst);</p>
 								</dd>
 							</dl>
 						</div>
@@ -884,7 +906,7 @@ expect(result).toEqual([<span class="hljs-string">&#x27;bB&#x27;</span>, <span c
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/a14a63b/src/comparators.ts#L117">comparators.ts:117</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/132fd04/src/comparators.ts#L134">comparators.ts:134</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -893,7 +915,9 @@ expect(result).toEqual([<span class="hljs-string">&#x27;bB&#x27;</span>, <span c
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>see</dt>
-								<dd><p>trueFirst</p>
+								<dd><p>trueFirst
+										// use compareBy to broaden to truthy and falsy values
+									const truthyLast = compareBy(x =&gt; !!x, trueLast);</p>
 								</dd>
 							</dl>
 						</div>
@@ -930,7 +954,7 @@ expect(result).toEqual([<span class="hljs-string">&#x27;bB&#x27;</span>, <span c
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/a14a63b/src/comparators.ts#L6">comparators.ts:6</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/132fd04/src/comparators.ts#L6">comparators.ts:6</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
