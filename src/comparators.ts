@@ -12,7 +12,7 @@ export const unchanged: Comparator<any> = () => 0;
  * @param b second value
  * @example
  * // ascending
- * [0, 3, 5, 1, 2, 4].sort(naturalOrder) == [0, 1, 2, 3, 4, 5]
+ * [0, 3, 5, 1, 2, 4].sort(naturalOrder) == [0, 1, 2, 3, 4, 5];
  * naturalOrder(-1, 1) === -1;
  * naturalOrder("AA", "B") === -1; // alphabetical for strings
  * naturalOrder("A", "a") === -1; // alphabetical for strings
@@ -26,7 +26,7 @@ export const naturalOrder: Comparator<any> = (a, b) => (a === b ? 0 : a < b ? -1
  * @param b second value
  * @example
  * // descending
- * [0, 3, 5, 1, 2, 4].sort(reversedOrder) == [5, 4, 3, 2, 1, 0]
+ * [0, 3, 5, 1, 2, 4].sort(reversedOrder) == [5, 4, 3, 2, 1, 0];
  * reversedOrder(-1, 1) === 1;
  * reversedOrder("AA", "B") === 1; // alphabetical for strings
  * reversedOrder("A", "a") === 1; // alphabetical for strings
@@ -61,7 +61,7 @@ export const localeCompare: Comparator<string> = (a, b) => a.localeCompare(b);
  * @param a first value
  * @param b second value
  * @example
- * ['abc', 'a', 'ab'].sort(byLength) == ['a', 'ab', 'abc']
+ * ['abc', 'a', 'ab'].sort(byLength) == ['a', 'ab', 'abc'];
  */
 export const byLength: Comparator<{ length: number }> = (a, b) => a.length - b.length;
 
@@ -72,7 +72,7 @@ export const byLength: Comparator<{ length: number }> = (a, b) => a.length - b.l
  * @param b second value
  * @example
  * [new Set([0, 1, 2]), new Set([0]), new Set([0, 1])].sort(bySize)
- *   == [new Set([0]), new Set([0, 1]), new Set([0, 1, 2])]
+ *   == [new Set([0]), new Set([0, 1]), new Set([0, 1, 2])];
  */
 export const bySize: Comparator<{ size: number }> = (a, b) => a.size - b.size;
 
