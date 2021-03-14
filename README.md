@@ -1,9 +1,10 @@
 # comparing <a href="https://www.github.com/JanMalch/comparing"><img src="https://raw.githubusercontent.com/JanMalch/comparing/master/.github/assets/logo.png" width="90" height="90" align="right"></a>
 
 [![npm](https://img.shields.io/npm/v/comparing)][npm-url]
+[![documentation](https://img.shields.io/badge/docs-available-success)][docs-url]
+[![minified + gzip](https://badgen.net/bundlephobia/minzip/comparing)][bundlephobia-url]
 [![Build](https://github.com/JanMalch/comparing/workflows/Build/badge.svg)][build-url]
 [![codecov](https://codecov.io/gh/JanMalch/comparing/branch/master/graph/badge.svg)][codecov-url]
-[![minified + gzip](https://badgen.net/bundlephobia/minzip/comparing)][bundlephobia-url]
 
 <i>Easily create descriptive comparators.</i>
 
