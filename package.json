@@ -27,9 +27,6 @@
     "url": "https://github.com/JanMalch/comparing/issues"
   },
   "license": "MIT",
-  "engines": {
-    "node": ">=6.0.0"
-  },
   "publishConfig": {
     "access": "public"
   },
