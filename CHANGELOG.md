@@ -1,3 +1,6 @@
+
+### [1.0.1](https://github.com/JanMalch/comparing/compare/v1.0.0...v1.0.1) (2021-03-14)
+
 ## [1.0.0](https://github.com/JanMalch/comparing/compare/v1.0.0-rc.0...v1.0.0) (2020-10-26)
 
 ### ⚠ BREAKING CHANGES
