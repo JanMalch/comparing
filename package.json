@@ -42,6 +42,7 @@
     "release": "standard-version",
     "prettier": "prettier --write **/*.ts"
   },
+  "sideEffects": false,
   "jest": {
     "transform": {
       ".ts": "ts-jest"
