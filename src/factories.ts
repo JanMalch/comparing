@@ -106,9 +106,10 @@ export function composeComparators<T>(
  */
 export interface ComparatorWithPredicateFactory<T> {
   /**
-   * Add another predicate and comparator that the final comparator can handle.
+   * Add another predicate and comparator.
    * @param predicate a predicate that indicates if the following comparator can handle the value
    * @param comparator a comparator for the incoming value
+   * @see ComparatorWithPredicateFactory
    */
   add<U>(
     predicate: ((value: any) => value is U) | ((value: U) => boolean),
@@ -116,7 +117,9 @@ export interface ComparatorWithPredicateFactory<T> {
   ): ComparatorWithPredicateFactory<T | U>;
 
   /**
-   * Creates a single comparator that will only accept values, that match the attached predicates.
+   * Creates a single comparator that will only accept values,
+   * which both match one of the attached predicates.
+   * @see ComparatorWithPredicateFactory
    */
   toComparator(): Comparator<T>;
 }
