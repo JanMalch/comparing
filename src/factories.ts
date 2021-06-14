@@ -73,3 +73,89 @@ export function composeComparators<T>(
     return order;
   };
 }
+
+/**
+ * A factory that holds a list of comparators and attached predicates.
+ * Use the `add` method to push additional comparators with predicates, thus broadening the range of accepted values and types.
+ *
+ * `toComparator()` will produce the final `Comparator`, that will only accept values which match one of the added predicates.
+ * Predicates will be checked in the same order as they were added.
+ *
+ * **On each comparator call both arguments must match the same predicate.**
+ * If no such predicate exists, the comparator will throw an error.
+ *
+ * Use type guards as predicates to ensure the best type safety.
+ *
+ * @example
+ * // inferred type: Comparator<string | number>
+ * const unionComparator = comparatorWithPredicate(isString, ignoreCase)
+ *   .add(isNumber, reversedOrder)
+ *   .toComparator();
+ *
+ * // set type explicitly when not using a proper type guard; otherwise any will be inferred
+ * // inferred type: Comparator<string | number | boolean | Person>
+ * const anotherUnionComparator = comparatorWithPredicate(isPerson, personComparator)
+ *   .add<string | number | boolean>(isPrimitive, naturalOrder)
+ *   .toComparator();
+ *
+ * // not provided by this library
+ * declare const isString = (value: any) => value is string;
+ * declare const isNumber = (value: any) => value is number;
+ * declare const isPerson = (value: any) => value is Person;
+ * declare const isPrimitive = (value: any) => boolean;
+ */
+export interface ComparatorWithPredicateFactory<T> {
+  /**
+   * Add another predicate and comparator that the final comparator can handle.
+   * @param predicate a predicate that indicates if the following comparator can handle the value
+   * @param comparator a comparator for the incoming value
+   */
+  add<U>(
+    predicate: ((value: any) => value is U) | ((value: U) => boolean),
+    comparator: Comparator<U>
+  ): ComparatorWithPredicateFactory<T | U>;
+
+  /**
+   * Creates a single comparator that will only accept values, that match the attached predicates.
+   */
+  toComparator(): Comparator<T>;
+}
+
+class ComparatorWithPredicateFactoryImpl<T> implements ComparatorWithPredicateFactory<T> {
+  constructor(private readonly comparators: Array<[(value: T) => boolean, Comparator<T>]>) {}
+
+  add<U>(
+    predicate: ((value: any) => value is U) | ((value: U) => boolean),
+    comparator: Comparator<U>
+  ): ComparatorWithPredicateFactory<T | U> {
+    return new ComparatorWithPredicateFactoryImpl<T | U>([
+      ...(this.comparators as any),
+      [predicate, comparator],
+    ]);
+  }
+
+  toComparator(): Comparator<T> {
+    return (a, b) => {
+      const fittingComparator = this.comparators.find(
+        ([predicate]) => predicate(a) && predicate(b)
+      );
+      if (!fittingComparator) {
+        throw new Error(`Unable to find comparator for types [${typeof a}, ${typeof b}]`);
+      }
+      return fittingComparator[1](a, b);
+    };
+  }
+}
+
+/**
+ * Creates a new `ComparatorWithPredicateFactory`, with the given first comparator and predicate.
+ * @param predicate a predicate that indicates if the following comparator can handle the value
+ * @param comparator a comparator for the incoming value
+ * @see ComparatorWithPredicateFactory
+ */
+export function comparatorWithPredicate<U>(
+  predicate: ((value: any) => value is U) | ((value: U) => boolean),
+  comparator: Comparator<U>
+): ComparatorWithPredicateFactory<U> {
+  return new ComparatorWithPredicateFactoryImpl([[predicate, comparator]]);
+}

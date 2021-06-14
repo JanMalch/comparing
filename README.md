@@ -15,6 +15,7 @@
 - easily sort arrays of objects via [`compareBy`](http://janmalch.github.io/comparing/#compareby)
 - [compose](http://janmalch.github.io/comparing/#composecomparators) or [reverse](http://janmalch.github.io/comparing/#reversecomparator) predefined and custom Comparators
 - define custom [orders for enums](http://janmalch.github.io/comparing/#comparatorfororder) or other arbitrary value sets
+- create comparators that [support type unions](http://janmalch.github.io/comparing/#comparatorwithpredicate)
 
 Make sure to checkout the [documentation][docs-url].
 
