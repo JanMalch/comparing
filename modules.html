@@ -2705,6 +2705,9 @@ img {
 </header>
 <nav class="tsd-navigation secondary">
 	<ul>
+		<li class=" tsd-kind-interface tsd-has-type-parameter">
+			<a href="interfaces/comparatorwithpredicatefactory.html" class="tsd-kind-icon">Comparator<wbr>With<wbr>Predicate<wbr>Factory</a>
+		</li>
 		<li class=" tsd-kind-type-alias tsd-has-type-parameter">
 			<a href="modules.html#comparator" class="tsd-kind-icon">Comparator</a>
 		</li>
@@ -2716,6 +2719,9 @@ img {
 		</li>
 		<li class=" tsd-kind-function tsd-has-type-parameter">
 			<a href="modules.html#comparatorfororder" class="tsd-kind-icon">comparator<wbr>For<wbr>Order</a>
+		</li>
+		<li class=" tsd-kind-function tsd-has-type-parameter">
+			<a href="modules.html#comparatorwithpredicate" class="tsd-kind-icon">comparator<wbr>With<wbr>Predicate</a>
 		</li>
 		<li class=" tsd-kind-function tsd-has-type-parameter">
 			<a href="modules.html#compareby" class="tsd-kind-icon">compare<wbr>By</a>
@@ -2776,6 +2782,7 @@ img {
 				<li>easily sort arrays of objects via <a href="http://janmalch.github.io/comparing/#compareby"><code>compareBy</code></a></li>
 				<li><a href="http://janmalch.github.io/comparing/#composecomparators">compose</a> or <a href="http://janmalch.github.io/comparing/#reversecomparator">reverse</a> predefined and custom Comparators</li>
 				<li>define custom <a href="http://janmalch.github.io/comparing/#comparatorfororder">orders for enums</a> or other arbitrary value sets</li>
+				<li>create comparators that <a href="http://janmalch.github.io/comparing/#comparatorwithpredicate">support type unions</a></li>
 			</ul>
 			<p>Make sure to checkout the <a href="https://janmalch.github.io/comparing/">documentation</a>.</p>
 			<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
@@ -2822,6 +2829,12 @@ img {
 			<section class="tsd-panel tsd-index-panel">
 				<div class="tsd-index-content">
 					<section class="tsd-index-section ">
+						<h3>Interfaces</h3>
+						<ul class="tsd-index-list">
+							<li class="tsd-kind-interface tsd-has-type-parameter"><a href="interfaces/comparatorwithpredicatefactory.html" class="tsd-kind-icon">Comparator<wbr>With<wbr>Predicate<wbr>Factory</a></li>
+						</ul>
+					</section>
+					<section class="tsd-index-section ">
 						<h3>Type aliases</h3>
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-type-alias tsd-has-type-parameter"><a href="modules.html#comparator" class="tsd-kind-icon">Comparator</a></li>
@@ -2833,6 +2846,7 @@ img {
 							<li class="tsd-kind-function"><a href="modules.html#bylength" class="tsd-kind-icon">by<wbr>Length</a></li>
 							<li class="tsd-kind-function"><a href="modules.html#bysize" class="tsd-kind-icon">by<wbr>Size</a></li>
 							<li class="tsd-kind-function tsd-has-type-parameter"><a href="modules.html#comparatorfororder" class="tsd-kind-icon">comparator<wbr>For<wbr>Order</a></li>
+							<li class="tsd-kind-function tsd-has-type-parameter"><a href="modules.html#comparatorwithpredicate" class="tsd-kind-icon">comparator<wbr>With<wbr>Predicate</a></li>
 							<li class="tsd-kind-function tsd-has-type-parameter"><a href="modules.html#compareby" class="tsd-kind-icon">compare<wbr>By</a></li>
 							<li class="tsd-kind-function tsd-has-type-parameter"><a href="modules.html#composecomparators" class="tsd-kind-icon">compose<wbr>Comparators</a></li>
 							<li class="tsd-kind-function"><a href="modules.html#ignorecase" class="tsd-kind-icon">ignore<wbr>Case</a></li>
@@ -2858,7 +2872,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Comparator&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>a<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span>, b<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/b8749db/src/types.ts#L4">types.ts:4</a></li>
+						<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/c675ee2/src/types.ts#L4">types.ts:4</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2910,7 +2924,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/b8749db/src/comparators.ts#L66">comparators.ts:66</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/c675ee2/src/comparators.ts#L66">comparators.ts:66</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2963,7 +2977,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/b8749db/src/comparators.ts#L77">comparators.ts:77</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/c675ee2/src/comparators.ts#L77">comparators.ts:77</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3017,7 +3031,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/b8749db/src/factories.ts#L28">factories.ts:28</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/c675ee2/src/factories.ts#L28">factories.ts:28</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3052,6 +3066,54 @@ img {
 				</ul>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-function tsd-has-type-parameter">
+				<a name="comparatorwithpredicate" class="tsd-anchor"></a>
+				<h3>comparator<wbr>With<wbr>Predicate</h3>
+				<ul class="tsd-signatures tsd-kind-function tsd-has-type-parameter">
+					<li class="tsd-signature tsd-kind-icon">comparator<wbr>With<wbr>Predicate&lt;U&gt;<span class="tsd-signature-symbol">(</span>predicate<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">value</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">U</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">U</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span>, comparator<span class="tsd-signature-symbol">: </span><a href="modules.html#comparator" class="tsd-signature-type" data-tsd-kind="Type alias">Comparator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">U</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="interfaces/comparatorwithpredicatefactory.html" class="tsd-signature-type" data-tsd-kind="Interface">ComparatorWithPredicateFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">U</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/c675ee2/src/factories.ts#L156">factories.ts:156</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Creates a new <code>ComparatorWithPredicateFactory</code>, with the given first comparator and predicate.</p>
+							</div>
+							<dl class="tsd-comment-tags">
+								<dt>see</dt>
+								<dd><p>ComparatorWithPredicateFactory</p>
+								</dd>
+							</dl>
+						</div>
+						<h4 class="tsd-type-parameters-title">Type parameters</h4>
+						<ul class="tsd-type-parameters">
+							<li>
+								<h4>U</h4>
+							</li>
+						</ul>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>predicate: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">value</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">U</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">U</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>a predicate that indicates if the following comparator can handle the value</p>
+								</div>
+							</li>
+							<li>
+								<h5>comparator: <a href="modules.html#comparator" class="tsd-signature-type" data-tsd-kind="Type alias">Comparator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">U</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>a comparator for the incoming value</p>
+								</div>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <a href="interfaces/comparatorwithpredicatefactory.html" class="tsd-signature-type" data-tsd-kind="Interface">ComparatorWithPredicateFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">U</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-function tsd-has-type-parameter">
 				<a name="compareby" class="tsd-anchor"></a>
 				<h3>compare<wbr>By</h3>
 				<ul class="tsd-signatures tsd-kind-function tsd-has-type-parameter">
@@ -3061,7 +3123,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/b8749db/src/factories.ts#L13">factories.ts:13</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/c675ee2/src/factories.ts#L13">factories.ts:13</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3132,7 +3194,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/b8749db/src/factories.ts#L63">factories.ts:63</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/c675ee2/src/factories.ts#L63">factories.ts:63</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3178,7 +3240,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/b8749db/src/comparators.ts#L47">comparators.ts:47</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/c675ee2/src/comparators.ts#L47">comparators.ts:47</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3224,7 +3286,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/b8749db/src/comparators.ts#L56">comparators.ts:56</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/c675ee2/src/comparators.ts#L56">comparators.ts:56</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3266,7 +3328,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/b8749db/src/comparators.ts#L20">comparators.ts:20</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/c675ee2/src/comparators.ts#L20">comparators.ts:20</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3313,7 +3375,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/b8749db/src/comparators.ts#L86">comparators.ts:86</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/c675ee2/src/comparators.ts#L86">comparators.ts:86</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3356,7 +3418,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/b8749db/src/comparators.ts#L104">comparators.ts:104</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/c675ee2/src/comparators.ts#L104">comparators.ts:104</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3399,7 +3461,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/b8749db/src/factories.ts#L48">factories.ts:48</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/c675ee2/src/factories.ts#L48">factories.ts:48</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3436,7 +3498,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/b8749db/src/comparators.ts#L36">comparators.ts:36</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/c675ee2/src/comparators.ts#L36">comparators.ts:36</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3485,7 +3547,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/b8749db/src/comparators.ts#L124">comparators.ts:124</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/c675ee2/src/comparators.ts#L124">comparators.ts:124</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3531,7 +3593,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/b8749db/src/comparators.ts#L134">comparators.ts:134</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/c675ee2/src/comparators.ts#L134">comparators.ts:134</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3575,7 +3637,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/b8749db/src/comparators.ts#L6">comparators.ts:6</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/c675ee2/src/comparators.ts#L6">comparators.ts:6</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3601,6 +3663,9 @@ img {
 			<div class="container">
 				<h2>Legend</h2>
 				<div class="tsd-legend-group">
+					<ul class="tsd-legend">
+						<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+					</ul>
 				</div>
 			</div>
 		</footer>
