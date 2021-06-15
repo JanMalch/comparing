@@ -1,4 +1,11 @@
 
+## [1.1.0](https://github.com/JanMalch/comparing/compare/v1.0.1...v1.1.0) (2021-06-15)
+
+
+### Features
+
+* add a factory for comparators with attached predicates ([c675ee2](https://github.com/JanMalch/comparing/commit/c675ee266ca2adbd3f16808cf7bc895c559825de))
+
 ### [1.0.1](https://github.com/JanMalch/comparing/compare/v1.0.0...v1.0.1) (2021-03-14)
 
 ## [1.0.0](https://github.com/JanMalch/comparing/compare/v1.0.0-rc.0...v1.0.0) (2020-10-26)
