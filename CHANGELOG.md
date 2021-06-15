@@ -1,4 +1,11 @@
 
+## [1.2.0](https://github.com/JanMalch/comparing/compare/v1.1.0...v1.2.0) (2021-06-15)
+
+
+### Features
+
+* accept a fallback comparator and improve method names for comparatorWithPredicate ([db7b4ba](https://github.com/JanMalch/comparing/commit/db7b4ba725d46f46d70409ed95bb2500b44eb33a))
+
 ## [1.1.0](https://github.com/JanMalch/comparing/compare/v1.0.1...v1.1.0) (2021-06-15)
 
 
