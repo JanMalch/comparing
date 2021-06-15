@@ -1,5 +1,5 @@
 import { Comparator } from './types';
-import { naturalOrder } from './comparators';
+import { naturalOrder, unchanged } from './comparators';
 
 /**
  * Creates a comparator that compares two values of type `T`, based on the selected value of type `O` and the given comparator.
@@ -161,4 +161,46 @@ export function comparatorWithPredicate<U>(
   comparator: Comparator<U>
 ): ComparatorWithPredicateFactory<U> {
   return new ComparatorWithPredicateFactoryImpl([[predicate, comparator]]);
+}
+
+export function comparatorForDirections<T>(
+  ascendingComparator: Comparator<T>
+): (direction: 'asc' | 'desc' | '') => Comparator<T>;
+export function comparatorForDirections<T, Asc, Desc>(
+  ascendingComparator: Comparator<T>,
+  options: {
+    asc: Asc;
+    desc: Desc;
+  }
+): (direction: Asc | Desc) => Comparator<T>;
+export function comparatorForDirections<T, Asc, Desc, Unchanged>(
+  ascendingComparator: Comparator<T>,
+  options: {
+    asc: Asc;
+    desc: Desc;
+    unchanged: Unchanged;
+  }
+): (direction: Asc | Desc | Unchanged) => Comparator<T>;
+export function comparatorForDirections(
+  ascendingComparator: Comparator<any>,
+  options: {
+    asc: any;
+    desc: any;
+    unchanged?: any;
+  } = { asc: 'asc', desc: 'desc', unchanged: '' }
+) {
+  const descending = reverseComparator(ascendingComparator);
+  const hasUnchanged = 'unchanged' in options;
+  return (direction: any) => {
+    if (direction === options.asc) {
+      return ascendingComparator;
+    }
+    if (direction === options.desc) {
+      return descending;
+    }
+    if (hasUnchanged && direction === options.unchanged) {
+      return unchanged;
+    }
+    throw new Error(`Cannot determine comparator for direction ${JSON.stringify(direction)}.`);
+  };
 }

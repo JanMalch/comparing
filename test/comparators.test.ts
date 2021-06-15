@@ -13,6 +13,7 @@ import {
   unchanged,
 } from '../src/comparators';
 import {
+  comparatorForDirections,
   comparatorForOrder,
   comparatorWithPredicate,
   compareBy,
@@ -342,3 +343,31 @@ describe('comparatorWithPredicate', () => {
     expect(() => unionComparator(1, '2')).toThrow();
   });
 });
+
+describe('comparatorForDirections', () => {
+  it('should use the correct order based on the given direction', () => {
+    const comparator = comparatorForDirections(naturalOrder)
+    expect(comparator('asc')(0, 1)).toBe(FIRST_BEFORE_SECOND)
+    expect(comparator('desc')(0, 1)).toBe(FIRST_AFTER_SECOND)
+    expect(comparator('')(0, 1)).toBe(FIRST_SAME_AS_SECOND)
+  });
+
+  it('should adapt based to the given direction keys', () => {
+    const comparator = comparatorForDirections(naturalOrder, { asc: 'ascending', desc: 'descending', unchanged: undefined } as const)
+    expect(comparator('ascending')(0, 1)).toBe(FIRST_BEFORE_SECOND)
+    expect(comparator('descending')(0, 1)).toBe(FIRST_AFTER_SECOND)
+    expect(comparator(undefined)(0, 1)).toBe(FIRST_SAME_AS_SECOND)
+  });
+
+  it('should throw if an unknown direction is passed', () => {
+    const comparator = comparatorForDirections(naturalOrder, { asc: 'ascending', desc: 'descending', unchanged: undefined } as const)
+    expect(() => comparator('asc' as any)).toThrow()
+    expect(() => comparator('des' as any)).toThrow()
+    expect(() => comparator('' as any)).toThrow()
+  });
+
+  it('should throw if the unchanged direction was not included and undefined is passed in', () => {
+    const comparator = comparatorForDirections(naturalOrder, { asc: 'ascending', desc: 'descending'} as const)
+    expect(() => comparator(undefined as any)).toThrow()
+  });
+})
