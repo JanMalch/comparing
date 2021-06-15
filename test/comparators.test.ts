@@ -291,7 +291,7 @@ describe('comparatorWithPredicate', () => {
   const isPrimitive = (value: any): boolean => typeof value !== 'object';
 
   it('should work with a single comparator', () => {
-    const stringComparator = comparatorWithPredicate(isString, ignoreCase).toComparator();
+    const stringComparator = comparatorWithPredicate(isString, ignoreCase).orElseThrow();
     expect(stringComparator('A', 'a')).toBe(FIRST_SAME_AS_SECOND);
   });
 
@@ -301,9 +301,9 @@ describe('comparatorWithPredicate', () => {
       isPerson,
       compareBy((foo) => foo.name, localeCompare)
     )
-      .add(isString, ignoreCase)
-      .add(isNumber, reversedOrder)
-      .toComparator();
+      .orIf(isString, ignoreCase)
+      .orIf(isNumber, reversedOrder)
+      .orElseThrow();
 
     expect(unionComparator(1, 2)).toBe(FIRST_AFTER_SECOND); // isNumber -> reversedOrder
     expect(unionComparator('A', 'a')).toBe(FIRST_SAME_AS_SECOND); // isString -> ignoreCase
@@ -318,27 +318,46 @@ describe('comparatorWithPredicate', () => {
     )
       // As "isPrimitive" only returns "boolean", the comparator would accept "any" but you can narrow the types.
       // Type Guards are preferred though.
-      .add<string | number>(isPrimitive, naturalOrder)
-      .toComparator();
+      .orIf<string | number>(isPrimitive, naturalOrder)
+      .orElseThrow();
 
     expect(unionComparator(1, 2)).toBe(FIRST_BEFORE_SECOND); // isPrimitive -> naturalOrder
     expect(unionComparator('A', 'a')).toBe(FIRST_BEFORE_SECOND); // isPrimitive -> naturalOrder
     expect(unionComparator({ name: 'John' }, { name: 'Frannie' })).toBe(FIRST_AFTER_SECOND); // isPerson -> compare by names
   });
 
-  it("should throw an error if the values don't match the type of the comparator", () => {
-    const stringComparator = comparatorWithPredicate(
-      isString,
-      ignoreCase
-    ).toComparator() as Comparator<any>;
-    expect(() => stringComparator(1, 2)).toThrow();
+  describe('with orElseThrow', () => {
+    it("should throw an error if the values don't match the type of the comparator", () => {
+      const stringComparator = comparatorWithPredicate(
+        isString,
+        ignoreCase
+      ).orElseThrow() as Comparator<any>;
+      expect(() => stringComparator(1, 2)).toThrow();
+    });
+
+    it("should throw an error if the two passed values don't have the same type", () => {
+      // Comparator<string | number>
+      const unionComparator = comparatorWithPredicate(isString, ignoreCase)
+        .orIf(isNumber, naturalOrder)
+        .orElseThrow();
+      expect(() => unionComparator(1, '2')).toThrow();
+    });
   });
 
-  it("should throw an error if the two passed values don't have the same type", () => {
-    // Comparator<string | number>
-    const unionComparator = comparatorWithPredicate(isString, ignoreCase)
-      .add(isNumber, naturalOrder)
-      .toComparator();
-    expect(() => unionComparator(1, '2')).toThrow();
+  describe('with orElse', () => {
+    it("should use the fallback comparator if the values don't match the type of the comparator", () => {
+      const stringComparator = comparatorWithPredicate(isString, ignoreCase).orElse(
+        naturalOrder
+      ) as Comparator<any>;
+      expect(stringComparator(1, 2)).toBe(FIRST_BEFORE_SECOND);
+    });
+
+    it("should throw an error if the two passed values don't have the same type", () => {
+      // Comparator<string | number>
+      const unionComparator = comparatorWithPredicate(isString, ignoreCase)
+        .orIf(isNumber, naturalOrder)
+        .orElse(naturalOrder);
+      expect(unionComparator(1, 2)).toBe(FIRST_BEFORE_SECOND);
+    });
   });
 });

@@ -76,27 +76,28 @@ export function composeComparators<T>(
 
 /**
  * A factory that holds a list of comparators and attached predicates.
- * Use the `add` method to push additional comparators with predicates, thus broadening the range of accepted values and types.
+ * Use the `orIf` method to push additional comparators with predicates, thus broadening the range of accepted values and types.
  *
- * `toComparator()` will produce the final `Comparator`, that will only accept values which match one of the added predicates.
+ * `orElse` and `orElseThrow` will produce the final `Comparator`, that will only accept values which match one of the added predicates.
  * Predicates will be checked in the same order as they were added.
  *
  * **On each comparator call both arguments must match the same predicate.**
- * If no such predicate exists, the comparator will throw an error.
+ * If no such predicate exists, the comparator will either throw an error or use a fallback comparator,
+ * depending on whether you used `orElseThrow` or `orElse` respectively.
  *
  * Use type guards as predicates to ensure the best type safety.
  *
  * @example
  * // inferred type: Comparator<string | number>
  * const unionComparator = comparatorWithPredicate(isString, ignoreCase)
- *   .add(isNumber, reversedOrder)
- *   .toComparator();
+ *   .orIf(isNumber, reversedOrder)
+ *   .orElseThrow();
  *
  * // set type explicitly when not using a proper type guard; otherwise any will be inferred
  * // inferred type: Comparator<string | number | boolean | Person>
  * const anotherUnionComparator = comparatorWithPredicate(isPerson, personComparator)
- *   .add<string | number | boolean>(isPrimitive, naturalOrder)
- *   .toComparator();
+ *   .orIf<string | number | boolean>(isPrimitive, naturalOrder)
+ *   .orElseThrow();
  *
  * // not provided by this library
  * declare const isString = (value: any) => value is string;
@@ -110,8 +111,20 @@ export interface ComparatorWithPredicateFactory<T> {
    * @param predicate a predicate that indicates if the following comparator can handle the value
    * @param comparator a comparator for the incoming value
    * @see ComparatorWithPredicateFactory
+   * @deprecated use the identical `orIf` method instead. `add` will be removed in a future release.
    */
   add<U>(
+    predicate: ((value: any) => value is U) | ((value: U) => boolean),
+    comparator: Comparator<U>
+  ): ComparatorWithPredicateFactory<T | U>;
+
+  /**
+   * Add another predicate and comparator.
+   * @param predicate a predicate that indicates if the following comparator can handle the value
+   * @param comparator a comparator for the incoming value
+   * @see ComparatorWithPredicateFactory
+   */
+  orIf<U>(
     predicate: ((value: any) => value is U) | ((value: U) => boolean),
     comparator: Comparator<U>
   ): ComparatorWithPredicateFactory<T | U>;
@@ -120,14 +133,36 @@ export interface ComparatorWithPredicateFactory<T> {
    * Creates a single comparator that will only accept values,
    * which both match one of the attached predicates.
    * @see ComparatorWithPredicateFactory
+   * @deprecated use the identical `orElseThrow` method instead. `toComparator` will be removed in a future release.
    */
   toComparator(): Comparator<T>;
+
+  /**
+   * Creates a single comparator that will only accept values,
+   * which both match one of the attached predicates.
+   * @see ComparatorWithPredicateFactory
+   */
+  orElseThrow(): Comparator<T>;
+
+  /**
+   * Creates a single comparator that will only accept values,
+   * which both match one of the attached predicates.
+   * @see ComparatorWithPredicateFactory
+   */
+  orElse<U>(fallbackComparator: Comparator<U>): Comparator<T | U>;
 }
 
 class ComparatorWithPredicateFactoryImpl<T> implements ComparatorWithPredicateFactory<T> {
   constructor(private readonly comparators: Array<[(value: T) => boolean, Comparator<T>]>) {}
 
   add<U>(
+    predicate: ((value: any) => value is U) | ((value: U) => boolean),
+    comparator: Comparator<U>
+  ): ComparatorWithPredicateFactory<T | U> {
+    return this.orIf(predicate, comparator);
+  }
+
+  orIf<U>(
     predicate: ((value: any) => value is U) | ((value: U) => boolean),
     comparator: Comparator<U>
   ): ComparatorWithPredicateFactory<T | U> {
@@ -138,12 +173,22 @@ class ComparatorWithPredicateFactoryImpl<T> implements ComparatorWithPredicateFa
   }
 
   toComparator(): Comparator<T> {
-    return (a, b) => {
+    return this.orElseThrow();
+  }
+
+  orElseThrow(): Comparator<T> {
+    return this.orElse((a, b) => {
+      throw new Error(`Unable to find comparator for types [${typeof a}, ${typeof b}]`);
+    });
+  }
+
+  orElse<U>(fallbackComparator: Comparator<U>): Comparator<T | U> {
+    return (a: any, b: any) => {
       const fittingComparator = this.comparators.find(
         ([predicate]) => predicate(a) && predicate(b)
       );
       if (!fittingComparator) {
-        throw new Error(`Unable to find comparator for types [${typeof a}, ${typeof b}]`);
+        return fallbackComparator(a, b);
       }
       return fittingComparator[1](a, b);
     };
