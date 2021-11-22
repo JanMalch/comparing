@@ -1,4 +1,4 @@
-import { Comparator } from './types';
+import { Comparable, Comparator } from './types';
 
 /**
  * A comparator, that will leave any order unchanged by returning 0 for every comparison.
@@ -132,3 +132,22 @@ export const trueFirst: Comparator<boolean> = (a, b) => (a === b ? 0 : a ? -1 : 
  * const truthyLast = compareBy(x => !!x, trueLast);
  */
 export const trueLast: Comparator<boolean> = (a, b) => (a === b ? 0 : a ? 1 : -1);
+
+/**
+ * Compares two values that implement the `Comparable` interface,
+ * by invoking the `compareTo` method on the first value,
+ * with the second value as the argument.
+ * @param a first value
+ * @param b second value
+ * @example
+ * class Person implements Comparable<Person> {
+ *   constructor(public readonly name: string, public readonly age: number) {
+ *   }
+ *   compareTo(other: Person): number {
+ *     // implement this any way you want
+ *     return naturalOrder(this.age, other.age);
+ *   }
+ * }
+ * [new Person('a', 100), new Person('b', 20), new Person('c', 50)].sort(comparables);
+ */
+export const comparables = <T>(a: Comparable<T>, b: T) => a.compareTo(b);

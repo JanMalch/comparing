@@ -1,7 +1,7 @@
 import { Comparator } from '../dist/types/types';
 import {
   byLength,
-  bySize,
+  bySize, comparables,
   ignoreCase,
   localeCompare,
   naturalOrder,
@@ -19,6 +19,7 @@ import {
   composeComparators,
   reverseComparator,
 } from '../src/factories';
+import { Comparable } from '../src/types';
 
 const FIRST_BEFORE_SECOND = -1;
 const FIRST_SAME_AS_SECOND = 0;
@@ -234,6 +235,7 @@ describe('reversedOrder', () => {
   });
 });
 
+
 describe('byOrder', () => {
   it('should use the specified order', () => {
     const comparator = comparatorForOrder(['b', 'a', 'c']);
@@ -359,5 +361,23 @@ describe('comparatorWithPredicate', () => {
         .orElse(naturalOrder);
       expect(unionComparator(1, 2)).toBe(FIRST_BEFORE_SECOND);
     });
+  });
+});
+
+describe('comparables', () => {
+  class Person implements Comparable<Person> {
+    constructor(public readonly name: string, public readonly age: number) {
+    }
+
+    compareTo(other: Person): number {
+      // implement this any way you want
+      return naturalOrder(this.age, other.age);
+    }
+  }
+
+  it('should use the compareTo method', () => {
+    expect(comparables(new Person('A', 100), new Person('B', 101))).toBe(FIRST_BEFORE_SECOND);
+    expect(comparables(new Person('A', 100), new Person('B', 100))).toBe(FIRST_SAME_AS_SECOND);
+    expect(comparables(new Person('A', 101), new Person('B', 100))).toBe(FIRST_AFTER_SECOND);
   });
 });
