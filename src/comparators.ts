@@ -128,6 +128,7 @@ export const trueFirst: Comparator<boolean> = (a, b) => (a === b ? 0 : a ? -1 : 
  * @param a first value
  * @param b second value
  * @see trueFirst
+ * @example
  * // use compareBy to broaden to truthy and falsy values
  * const truthyLast = compareBy(x => !!x, trueLast);
  */
