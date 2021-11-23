@@ -175,6 +175,15 @@ describe('naturalOrder', () => {
     expect(naturalOrder(2, 1)).toBe(FIRST_AFTER_SECOND);
     expect(naturalOrder('AA', 'B')).toBe(FIRST_BEFORE_SECOND); // alphabetical
   });
+  it('should always put NaN last', () => {
+    expect(naturalOrder(Number.NaN, Number.NEGATIVE_INFINITY)).toBe(FIRST_AFTER_SECOND);
+    expect(naturalOrder(Number.NaN, Number.MIN_SAFE_INTEGER)).toBe(FIRST_AFTER_SECOND);
+    expect(naturalOrder(Number.NaN, -1)).toBe(FIRST_AFTER_SECOND);
+    expect(naturalOrder(Number.NaN, 0)).toBe(FIRST_AFTER_SECOND);
+    expect(naturalOrder(Number.NaN, 1)).toBe(FIRST_AFTER_SECOND);
+    expect(naturalOrder(Number.NaN, Number.MAX_SAFE_INTEGER)).toBe(FIRST_AFTER_SECOND);
+    expect(naturalOrder(Number.NaN, Number.POSITIVE_INFINITY)).toBe(FIRST_AFTER_SECOND);
+  });
 });
 
 describe('reversedOrder', () => {
@@ -183,6 +192,15 @@ describe('reversedOrder', () => {
     expect(reversedOrder(1, 1)).toBe(FIRST_SAME_AS_SECOND);
     expect(reversedOrder(1, 2)).toBe(FIRST_AFTER_SECOND);
     expect(reversedOrder('B', 'AA')).toBe(FIRST_BEFORE_SECOND); // alphabetical
+  });
+  it('should always put NaN last', () => {
+    expect(reversedOrder(Number.NaN, Number.NEGATIVE_INFINITY)).toBe(FIRST_AFTER_SECOND);
+    expect(reversedOrder(Number.NaN, Number.MIN_SAFE_INTEGER)).toBe(FIRST_AFTER_SECOND);
+    expect(reversedOrder(Number.NaN, -1)).toBe(FIRST_AFTER_SECOND);
+    expect(reversedOrder(Number.NaN, 0)).toBe(FIRST_AFTER_SECOND);
+    expect(reversedOrder(Number.NaN, 1)).toBe(FIRST_AFTER_SECOND);
+    expect(reversedOrder(Number.NaN, Number.MAX_SAFE_INTEGER)).toBe(FIRST_AFTER_SECOND);
+    expect(reversedOrder(Number.NaN, Number.POSITIVE_INFINITY)).toBe(FIRST_AFTER_SECOND);
   });
 });
 
