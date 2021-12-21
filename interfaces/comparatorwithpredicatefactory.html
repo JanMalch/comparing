@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ComparatorWithPredicateFactory | comparing - v1.1.0</title>
-	<meta name="description" content="Documentation for comparing - v1.1.0">
+	<title>ComparatorWithPredicateFactory | comparing - v1.2.0</title>
+	<meta name="description" content="Documentation for comparing - v1.2.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style type="text/css">:root {
   --color-background: #fdfdfd;
@@ -2674,7 +2674,7 @@ img {
 		<div class="container">
 			<div class="table-wrap">
 				<div class="table-cell">
-					<strong><a href="../index.html">comparing - v1.1.0</a></strong>
+					<strong><a href="../index.html">comparing - v1.2.0</a></strong>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -2704,11 +2704,23 @@ img {
 </header>
 <nav class="tsd-navigation secondary">
 	<ul>
+		<li class=" tsd-kind-interface tsd-has-type-parameter">
+			<a href="comparable.html" class="tsd-kind-icon">Comparable</a>
+		</li>
 		<li class="current tsd-kind-interface tsd-has-type-parameter">
 			<a href="comparatorwithpredicatefactory.html" class="tsd-kind-icon">Comparator<wbr>With<wbr>Predicate<wbr>Factory</a>
 			<ul>
 				<li class=" tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
 					<a href="comparatorwithpredicatefactory.html#add" class="tsd-kind-icon">add</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
+					<a href="comparatorwithpredicatefactory.html#orelse" class="tsd-kind-icon">or<wbr>Else</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-interface">
+					<a href="comparatorwithpredicatefactory.html#orelsethrow" class="tsd-kind-icon">or<wbr>Else<wbr>Throw</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
+					<a href="comparatorwithpredicatefactory.html#orif" class="tsd-kind-icon">or<wbr>If</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-interface">
 					<a href="comparatorwithpredicatefactory.html#tocomparator" class="tsd-kind-icon">to<wbr>Comparator</a>
@@ -2723,6 +2735,9 @@ img {
 		</li>
 		<li class=" tsd-kind-function">
 			<a href="../modules.html#bysize" class="tsd-kind-icon">by<wbr>Size</a>
+		</li>
+		<li class=" tsd-kind-function tsd-has-type-parameter">
+			<a href="../modules.html#comparables" class="tsd-kind-icon">comparables</a>
 		</li>
 		<li class=" tsd-kind-function tsd-has-type-parameter">
 			<a href="../modules.html#comparatorfororder" class="tsd-kind-icon">comparator<wbr>For<wbr>Order</a>
@@ -2774,24 +2789,25 @@ img {
 			<div class="tsd-comment tsd-typography">
 				<div class="lead">
 					<p>A factory that holds a list of comparators and attached predicates.
-					Use the <code>add</code> method to push additional comparators with predicates, thus broadening the range of accepted values and types.</p>
+					Use the <code>orIf</code> method to push additional comparators with predicates, thus broadening the range of accepted values and types.</p>
 				</div>
-				<p><code>toComparator()</code> will produce the final <code>Comparator</code>, that will only accept values which match one of the added predicates.
+				<p><code>orElse</code> and <code>orElseThrow</code> will produce the final <code>Comparator</code>, that will only accept values which match one of the added predicates.
 				Predicates will be checked in the same order as they were added.</p>
 				<p><strong>On each comparator call both arguments must match the same predicate.</strong>
-				If no such predicate exists, the comparator will throw an error.</p>
+					If no such predicate exists, the comparator will either throw an error or use a fallback comparator,
+				depending on whether you used <code>orElseThrow</code> or <code>orElse</code> respectively.</p>
 				<p>Use type guards as predicates to ensure the best type safety.</p>
 				<dl class="tsd-comment-tags">
 					<dt>example</dt>
 					<dd><p>// inferred type: Comparator&lt;string | number&gt;
 							const unionComparator = comparatorWithPredicate(isString, ignoreCase)
-							.add(isNumber, reversedOrder)
-						.toComparator();</p>
+							.orIf(isNumber, reversedOrder)
+						.orElseThrow();</p>
 						<p>// set type explicitly when not using a proper type guard; otherwise any will be inferred
 							// inferred type: Comparator&lt;string | number | boolean | Person&gt;
 							const anotherUnionComparator = comparatorWithPredicate(isPerson, personComparator)
-							.add&lt;string | number | boolean&gt;(isPrimitive, naturalOrder)
-						.toComparator();</p>
+							.orIf&lt;string | number | boolean&gt;(isPrimitive, naturalOrder)
+						.orElseThrow();</p>
 						<p>// not provided by this library
 							declare const isString = (value: any) =&gt; value is string;
 							declare const isNumber = (value: any) =&gt; value is number;
@@ -2825,6 +2841,9 @@ img {
 						<h3>Methods</h3>
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter"><a href="comparatorwithpredicatefactory.html#add" class="tsd-kind-icon">add</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter"><a href="comparatorwithpredicatefactory.html#orelse" class="tsd-kind-icon">or<wbr>Else</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="comparatorwithpredicatefactory.html#orelsethrow" class="tsd-kind-icon">or<wbr>Else<wbr>Throw</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter"><a href="comparatorwithpredicatefactory.html#orif" class="tsd-kind-icon">or<wbr>If</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="comparatorwithpredicatefactory.html#tocomparator" class="tsd-kind-icon">to<wbr>Comparator</a></li>
 						</ul>
 					</section>
@@ -2843,7 +2862,126 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/5930386/src/factories.ts#L114">factories.ts:114</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/98a29a4/src/factories.ts#L116">factories.ts:116</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Add another predicate and comparator.</p>
+							</div>
+							<dl class="tsd-comment-tags">
+								<dt>see</dt>
+								<dd><p>ComparatorWithPredicateFactory</p>
+								</dd>
+								<dt>deprecated</dt>
+								<dd><p>use the identical <code>orIf</code> method instead. <code>add</code> will be removed in a future release.</p>
+								</dd>
+							</dl>
+						</div>
+						<h4 class="tsd-type-parameters-title">Type parameters</h4>
+						<ul class="tsd-type-parameters">
+							<li>
+								<h4>U</h4>
+							</li>
+						</ul>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>predicate: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">value</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">U</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">U</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>a predicate that indicates if the following comparator can handle the value</p>
+								</div>
+							</li>
+							<li>
+								<h5>comparator: <a href="../modules.html#comparator" class="tsd-signature-type" data-tsd-kind="Type alias">Comparator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">U</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>a comparator for the incoming value</p>
+								</div>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <a href="comparatorwithpredicatefactory.html" class="tsd-signature-type" data-tsd-kind="Interface">ComparatorWithPredicateFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">U</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
+				<a name="orelse" class="tsd-anchor"></a>
+				<h3>or<wbr>Else</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
+					<li class="tsd-signature tsd-kind-icon">or<wbr>Else&lt;U&gt;<span class="tsd-signature-symbol">(</span>fallbackComparator<span class="tsd-signature-symbol">: </span><a href="../modules.html#comparator" class="tsd-signature-type" data-tsd-kind="Type alias">Comparator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">U</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules.html#comparator" class="tsd-signature-type" data-tsd-kind="Type alias">Comparator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">U</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/98a29a4/src/factories.ts#L152">factories.ts:152</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Creates a single comparator that will only accept values,
+								which both match one of the attached predicates.</p>
+							</div>
+							<dl class="tsd-comment-tags">
+								<dt>see</dt>
+								<dd><p>ComparatorWithPredicateFactory</p>
+								</dd>
+							</dl>
+						</div>
+						<h4 class="tsd-type-parameters-title">Type parameters</h4>
+						<ul class="tsd-type-parameters">
+							<li>
+								<h4>U</h4>
+							</li>
+						</ul>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>fallbackComparator: <a href="../modules.html#comparator" class="tsd-signature-type" data-tsd-kind="Type alias">Comparator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">U</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <a href="../modules.html#comparator" class="tsd-signature-type" data-tsd-kind="Type alias">Comparator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">U</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
+				<a name="orelsethrow" class="tsd-anchor"></a>
+				<h3>or<wbr>Else<wbr>Throw</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
+					<li class="tsd-signature tsd-kind-icon">or<wbr>Else<wbr>Throw<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules.html#comparator" class="tsd-signature-type" data-tsd-kind="Type alias">Comparator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/98a29a4/src/factories.ts#L145">factories.ts:145</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Creates a single comparator that will only accept values,
+								which both match one of the attached predicates.</p>
+							</div>
+							<dl class="tsd-comment-tags">
+								<dt>see</dt>
+								<dd><p>ComparatorWithPredicateFactory</p>
+								</dd>
+							</dl>
+						</div>
+						<h4 class="tsd-returns-title">Returns <a href="../modules.html#comparator" class="tsd-signature-type" data-tsd-kind="Type alias">Comparator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
+				<a name="orif" class="tsd-anchor"></a>
+				<h3>or<wbr>If</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
+					<li class="tsd-signature tsd-kind-icon">or<wbr>If&lt;U&gt;<span class="tsd-signature-symbol">(</span>predicate<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">value</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">U</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">U</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span>, comparator<span class="tsd-signature-symbol">: </span><a href="../modules.html#comparator" class="tsd-signature-type" data-tsd-kind="Type alias">Comparator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">U</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="comparatorwithpredicatefactory.html" class="tsd-signature-type" data-tsd-kind="Interface">ComparatorWithPredicateFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">U</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/98a29a4/src/factories.ts#L127">factories.ts:127</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2891,7 +3029,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/5930386/src/factories.ts#L124">factories.ts:124</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/98a29a4/src/factories.ts#L138">factories.ts:138</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2902,6 +3040,9 @@ img {
 							<dl class="tsd-comment-tags">
 								<dt>see</dt>
 								<dd><p>ComparatorWithPredicateFactory</p>
+								</dd>
+								<dt>deprecated</dt>
+								<dd><p>use the identical <code>orElseThrow</code> method instead. <code>toComparator</code> will be removed in a future release.</p>
 								</dd>
 							</dl>
 						</div>
