@@ -137,6 +137,21 @@ describe('comparatorWithPredicate', () => {
     expect(unionComparator({ name: 'John' }, { name: 'Frannie' })).toBe(FIRST_AFTER_SECOND); // isPerson -> compare by names
   });
 
+  it('should work with the deprecated methods', () => {
+    // Comparator<Person | string | number>
+    const unionComparator = comparatorWithPredicate(
+      isPerson,
+      compareBy((foo) => foo.name, localeCompare)
+    )
+      .add(isString, ignoreCase)
+      .add(isNumber, reversedOrder)
+      .toComparator();
+
+    expect(unionComparator(1, 2)).toBe(FIRST_AFTER_SECOND); // isNumber -> reversedOrder
+    expect(unionComparator('A', 'a')).toBe(FIRST_SAME_AS_SECOND); // isString -> ignoreCase
+    expect(unionComparator({ name: 'John' }, { name: 'Frannie' })).toBe(FIRST_AFTER_SECOND); // isPerson -> compare by names
+  });
+
   it('should accept specify the type of the added comparator via generics', () => {
     // Comparator<Person | string | number>
     const unionComparator = comparatorWithPredicate(
