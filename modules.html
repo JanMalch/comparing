@@ -2796,38 +2796,88 @@ img {
 			</a>
 			<pre><code class="language-bash"><span style="color: #000000">npm i comparing</span>
 </code></pre>
-			<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
-				<h2>Usage</h2>
+			<p>Import all comparators, factories and types <code>from &#39;comparing&#39;</code>.</p>
+			<a href="#examples" id="examples" style="color: inherit; text-decoration: none;">
+				<h2>Examples</h2>
 			</a>
-			<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> {</span>
-<span style="color: #000000">  </span><span style="color: #001080">naturalOrder</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">reverseComparator</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">composeComparators</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">ignoreCase</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">compareBy</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">comparatorOfOrder</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">Comparator</span><span style="color: #000000">,</span>
-<span style="color: #000000">} </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;comparing&#039;</span><span style="color: #000000">;</span>
+			<p>All comparators are fully tested, so you can find more examples in the <a href="https://github.com/JanMalch/comparing/tree/master/test">unit tests</a>.
+			A lot of comparators also have examples in their <a href="https://janmalch.github.io/comparing/">documentation</a>.</p>
+			<a href="#basic-usage" id="basic-usage" style="color: inherit; text-decoration: none;">
+				<h3>Basic usage</h3>
+			</a>
+			<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">naturalOrder</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;comparing&#039;</span><span style="color: #000000">;</span>
 
-<span style="color: #008000">// chose from various available Comparators</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">simple</span><span style="color: #000000"> = [</span><span style="color: #098658">4</span><span style="color: #000000">, </span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #098658">3</span><span style="color: #000000">, </span><span style="color: #098658">5</span><span style="color: #000000">].</span><span style="color: #795E26">sort</span><span style="color: #000000">(</span><span style="color: #001080">naturalOrder</span><span style="color: #000000">);</span>
-<span style="color: #795E26">expect</span><span style="color: #000000">(</span><span style="color: #001080">simple</span><span style="color: #000000">).</span><span style="color: #795E26">toEqual</span><span style="color: #000000">([</span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #098658">3</span><span style="color: #000000">, </span><span style="color: #098658">4</span><span style="color: #000000">, </span><span style="color: #098658">5</span><span style="color: #000000">]);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">actual</span><span style="color: #000000"> = [</span><span style="color: #098658">4</span><span style="color: #000000">, </span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #098658">3</span><span style="color: #000000">, </span><span style="color: #098658">5</span><span style="color: #000000">].</span><span style="color: #795E26">sort</span><span style="color: #000000">(</span><span style="color: #001080">naturalOrder</span><span style="color: #000000">);</span>
+<span style="color: #795E26">expect</span><span style="color: #000000">(</span><span style="color: #001080">actual</span><span style="color: #000000">).</span><span style="color: #795E26">toEqual</span><span style="color: #000000">([</span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #098658">3</span><span style="color: #000000">, </span><span style="color: #098658">4</span><span style="color: #000000">, </span><span style="color: #098658">5</span><span style="color: #000000">]);</span>
+</code></pre>
+			<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">comparator</span><span style="color: #000000">: </span><span style="color: #267F99">Comparator</span><span style="color: #000000">&lt;</span><span style="color: #267F99">string</span><span style="color: #000000"> | </span><span style="color: #267F99">null</span><span style="color: #000000">&gt; = </span><span style="color: #795E26">composeComparators</span><span style="color: #000000">([ </span><span style="color: #001080">nullishFirst</span><span style="color: #000000">, </span><span style="color: #001080">localeCompare</span><span style="color: #000000"> ]);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">actual</span><span style="color: #000000"> = [</span><span style="color: #A31515">&quot;A&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;a&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;b&quot;</span><span style="color: #000000">, </span><span style="color: #0000FF">null</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;B&quot;</span><span style="color: #000000">].</span><span style="color: #795E26">sort</span><span style="color: #000000">(</span><span style="color: #001080">comparator</span><span style="color: #000000">);</span>
+<span style="color: #795E26">expect</span><span style="color: #000000">(</span><span style="color: #001080">actual</span><span style="color: #000000">).</span><span style="color: #795E26">toEqual</span><span style="color: #000000">([</span><span style="color: #0000FF">null</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;a&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;A&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;b&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;B&quot;</span><span style="color: #000000">]);</span>
 
-<span style="color: #008000">// start with your own simple function</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #795E26">myCompareFn</span><span style="color: #000000">: </span><span style="color: #267F99">Comparator</span><span style="color: #000000">&lt;</span><span style="color: #267F99">string</span><span style="color: #000000">&gt; = (</span><span style="color: #001080">a</span><span style="color: #000000">, </span><span style="color: #001080">b</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">a</span><span style="color: #000000">.</span><span style="color: #795E26">charCodeAt</span><span style="color: #000000">(</span><span style="color: #098658">0</span><span style="color: #000000">) - </span><span style="color: #001080">b</span><span style="color: #000000">.</span><span style="color: #795E26">charCodeAt</span><span style="color: #000000">(</span><span style="color: #098658">0</span><span style="color: #000000">);</span>
-<span style="color: #008000">// create &quot;then ...&quot; comparisons with compose</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">complex</span><span style="color: #000000">: </span><span style="color: #267F99">Comparator</span><span style="color: #000000">&lt;</span><span style="color: #267F99">string</span><span style="color: #000000">&gt; = </span><span style="color: #795E26">composeComparators</span><span style="color: #000000">([</span>
-<span style="color: #000000">  </span><span style="color: #008000">// reverse any comparator</span>
-<span style="color: #000000">  </span><span style="color: #795E26">reverseComparator</span><span style="color: #000000">(</span><span style="color: #001080">myCompareFn</span><span style="color: #000000">),</span>
-<span style="color: #000000">  </span><span style="color: #008000">// compare by a certain field or other values via `compareBy`</span>
-<span style="color: #000000">  </span><span style="color: #795E26">compareBy</span><span style="color: #000000">((</span><span style="color: #001080">x</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">x</span><span style="color: #000000">.</span><span style="color: #795E26">charAt</span><span style="color: #000000">(</span><span style="color: #098658">1</span><span style="color: #000000">), </span><span style="color: #001080">ignoreCase</span><span style="color: #000000">),</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">reversedComparator</span><span style="color: #000000"> = </span><span style="color: #795E26">reverseComparator</span><span style="color: #000000">(</span><span style="color: #001080">comparator</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">actualReversed</span><span style="color: #000000"> = [</span><span style="color: #A31515">&quot;A&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;a&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;b&quot;</span><span style="color: #000000">, </span><span style="color: #0000FF">null</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;B&quot;</span><span style="color: #000000">].</span><span style="color: #795E26">sort</span><span style="color: #000000">(</span><span style="color: #001080">reversedComparator</span><span style="color: #000000">);</span>
+<span style="color: #795E26">expect</span><span style="color: #000000">(</span><span style="color: #001080">actual</span><span style="color: #000000">).</span><span style="color: #795E26">toEqual</span><span style="color: #000000">([</span><span style="color: #A31515">&quot;B&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;b&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;A&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;a&quot;</span><span style="color: #000000">, </span><span style="color: #0000FF">null</span><span style="color: #000000">]);</span>
+</code></pre>
+			<a href="#comparing-objects" id="comparing-objects" style="color: inherit; text-decoration: none;">
+				<h3>Comparing objects</h3>
+			</a>
+			<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">nameComparator</span><span style="color: #000000">: </span><span style="color: #267F99">Comparator</span><span style="color: #000000">&lt;{ </span><span style="color: #001080">name</span><span style="color: #000000">: </span><span style="color: #267F99">string</span><span style="color: #000000"> }&gt; = </span><span style="color: #795E26">compareBy</span><span style="color: #000000">(</span><span style="color: #001080">x</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">x</span><span style="color: #000000">.</span><span style="color: #001080">name</span><span style="color: #000000">, </span><span style="color: #001080">ignoreCase</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">orderComparator</span><span style="color: #000000"> = </span><span style="color: #795E26">compareBy</span><span style="color: #000000">(</span><span style="color: #001080">x</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">x</span><span style="color: #000000">.</span><span style="color: #001080">order</span><span style="color: #000000">, </span><span style="color: #795E26">composeComparators</span><span style="color: #000000">([ </span><span style="color: #001080">nullishLast</span><span style="color: #000000">, </span><span style="color: #001080">naturalOrder</span><span style="color: #000000"> ]));</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">myObjectComparator</span><span style="color: #000000"> = </span><span style="color: #795E26">composeComparators</span><span style="color: #000000">([ </span><span style="color: #001080">orderComparator</span><span style="color: #000000">, </span><span style="color: #001080">nameComparator</span><span style="color: #000000"> ]);</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">actual</span><span style="color: #000000"> = [</span>
+<span style="color: #000000">  { </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;B&#039;</span><span style="color: #000000">, </span><span style="color: #001080">order:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000"> },</span>
+<span style="color: #000000">  { </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;F&#039;</span><span style="color: #000000"> },</span>
+<span style="color: #000000">  { </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;C&#039;</span><span style="color: #000000">, </span><span style="color: #001080">order:</span><span style="color: #000000"> </span><span style="color: #098658">3</span><span style="color: #000000"> },</span>
+<span style="color: #000000">  { </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;A&#039;</span><span style="color: #000000">, </span><span style="color: #001080">order:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000"> },</span>
+<span style="color: #000000">  { </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;D&#039;</span><span style="color: #000000"> },</span>
+<span style="color: #000000">  { </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;E&#039;</span><span style="color: #000000">, </span><span style="color: #001080">order:</span><span style="color: #000000"> </span><span style="color: #098658">2</span><span style="color: #000000"> },</span>
+<span style="color: #000000">].</span><span style="color: #795E26">sort</span><span style="color: #000000">(</span><span style="color: #001080">myObjectComparator</span><span style="color: #000000">);</span>
+
+<span style="color: #795E26">expect</span><span style="color: #000000">(</span><span style="color: #001080">actual</span><span style="color: #000000">).</span><span style="color: #795E26">toEqual</span><span style="color: #000000">([</span>
+<span style="color: #000000">  { </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;A&#039;</span><span style="color: #000000">, </span><span style="color: #001080">order:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000"> },</span>
+<span style="color: #000000">  { </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;B&#039;</span><span style="color: #000000">, </span><span style="color: #001080">order:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000"> },</span>
+<span style="color: #000000">  { </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;E&#039;</span><span style="color: #000000">, </span><span style="color: #001080">order:</span><span style="color: #000000"> </span><span style="color: #098658">2</span><span style="color: #000000"> },</span>
+<span style="color: #000000">  { </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;C&#039;</span><span style="color: #000000">, </span><span style="color: #001080">order:</span><span style="color: #000000"> </span><span style="color: #098658">3</span><span style="color: #000000"> },</span>
+<span style="color: #000000">  { </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;D&#039;</span><span style="color: #000000"> },</span>
+<span style="color: #000000">  { </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;F&#039;</span><span style="color: #000000"> },</span>
 <span style="color: #000000">]);</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">result</span><span style="color: #000000"> = [</span><span style="color: #A31515">&#039;aB&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;bB&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;aa&#039;</span><span style="color: #000000">].</span><span style="color: #795E26">sort</span><span style="color: #000000">(</span><span style="color: #001080">complex</span><span style="color: #000000">);</span>
-<span style="color: #795E26">expect</span><span style="color: #000000">(</span><span style="color: #001080">result</span><span style="color: #000000">).</span><span style="color: #795E26">toEqual</span><span style="color: #000000">([</span><span style="color: #A31515">&#039;bB&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;aa&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;aB&#039;</span><span style="color: #000000">]);</span>
+</code></pre>
+			<p>The library has no dependencies, thus only creates and
+			works with the JavaScript objects and functions you already know.</p>
+			<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">compareBy</span><span style="color: #000000">, </span><span style="color: #001080">comparatorForOrder</span><span style="color: #000000">, </span><span style="color: #001080">compareBy</span><span style="color: #000000">, </span><span style="color: #001080">composeComparators</span><span style="color: #000000">, </span><span style="color: #001080">Comparator</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;comparing&#039;</span><span style="color: #000000">;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">toposort</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;toposort&#039;</span><span style="color: #000000">; </span><span style="color: #008000">// not included in this library</span>
 
-<span style="color: #008000">// define your own order for known values</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">myEnumComparator</span><span style="color: #000000"> = </span><span style="color: #795E26">comparatorForOrder</span><span style="color: #000000">([</span><span style="color: #001080">MyEnum</span><span style="color: #000000">.</span><span style="color: #0070C1">C</span><span style="color: #000000">, </span><span style="color: #001080">MyEnum</span><span style="color: #000000">.</span><span style="color: #0070C1">A</span><span style="color: #000000">, </span><span style="color: #001080">MyEnum</span><span style="color: #000000">.</span><span style="color: #0070C1">B</span><span style="color: #000000">]);</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">myDataComparator</span><span style="color: #000000"> = </span><span style="color: #795E26">compareBy</span><span style="color: #000000">((</span><span style="color: #001080">data</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">data</span><span style="color: #000000">.</span><span style="color: #001080">type</span><span style="color: #000000">, </span><span style="color: #001080">myEnumComparator</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">graph</span><span style="color: #000000"> = [</span>
+<span style="color: #000000">  </span><span style="color: #008000">// must first put on the shirt before the jacket, and so on ...</span>
+<span style="color: #000000">  [</span><span style="color: #A31515">&#039;put on your shirt&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;put on your jacket&#039;</span><span style="color: #000000">],</span>
+<span style="color: #000000">  [</span><span style="color: #A31515">&#039;put on your shorts&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;put on your jacket&#039;</span><span style="color: #000000">],</span>
+<span style="color: #000000">  [</span><span style="color: #A31515">&#039;put on your shorts&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;put on your shoes&#039;</span><span style="color: #000000">],</span>
+<span style="color: #000000">];</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">taskComparator</span><span style="color: #000000"> = </span><span style="color: #795E26">comparatorForOrder</span><span style="color: #000000">(</span><span style="color: #795E26">toposort</span><span style="color: #000000">(</span><span style="color: #001080">graph</span><span style="color: #000000">));</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">comparator</span><span style="color: #000000">: </span><span style="color: #267F99">Comparator</span><span style="color: #000000">&lt;{ </span><span style="color: #001080">day</span><span style="color: #000000">: </span><span style="color: #267F99">number</span><span style="color: #000000">, </span><span style="color: #001080">task</span><span style="color: #000000">: </span><span style="color: #267F99">string</span><span style="color: #000000"> }&gt; = </span><span style="color: #795E26">composeComparators</span><span style="color: #000000">([</span>
+<span style="color: #000000">  </span><span style="color: #795E26">compareBy</span><span style="color: #000000">(</span><span style="color: #001080">x</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">x</span><span style="color: #000000">.</span><span style="color: #001080">day</span><span style="color: #000000">), </span><span style="color: #008000">// naturalOrder implicitly</span>
+<span style="color: #000000">  </span><span style="color: #795E26">compareBy</span><span style="color: #000000">(</span><span style="color: #001080">x</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">x</span><span style="color: #000000">.</span><span style="color: #001080">task</span><span style="color: #000000">, </span><span style="color: #001080">taskComparator</span><span style="color: #000000">)</span>
+<span style="color: #000000">]);</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">todoList</span><span style="color: #000000"> = [</span>
+<span style="color: #000000">  { </span><span style="color: #001080">day:</span><span style="color: #000000"> </span><span style="color: #098658">0</span><span style="color: #000000">, </span><span style="color: #001080">task:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;put on your jacket&#039;</span><span style="color: #000000"> },</span>
+<span style="color: #000000">  { </span><span style="color: #001080">day:</span><span style="color: #000000"> </span><span style="color: #098658">0</span><span style="color: #000000">, </span><span style="color: #001080">task:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;put on your shirt&#039;</span><span style="color: #000000"> },</span>
+<span style="color: #000000">  { </span><span style="color: #001080">day:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #001080">task:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;put on your shoes&#039;</span><span style="color: #000000"> },</span>
+<span style="color: #000000">  { </span><span style="color: #001080">day:</span><span style="color: #000000"> </span><span style="color: #098658">2</span><span style="color: #000000">, </span><span style="color: #001080">task:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;put on your shirt&#039;</span><span style="color: #000000"> },</span>
+<span style="color: #000000">  { </span><span style="color: #001080">day:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #001080">task:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;put on your jacket&#039;</span><span style="color: #000000"> },</span>
+<span style="color: #000000">  { </span><span style="color: #001080">day:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #001080">task:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;put on your shorts&#039;</span><span style="color: #000000"> },</span>
+<span style="color: #000000">].</span><span style="color: #795E26">sort</span><span style="color: #000000">(</span><span style="color: #001080">comparator</span><span style="color: #000000">);</span>
+
+<span style="color: #795E26">expect</span><span style="color: #000000">(</span><span style="color: #001080">todoList</span><span style="color: #000000">).</span><span style="color: #795E26">toEqual</span><span style="color: #000000">([</span>
+<span style="color: #000000">  { </span><span style="color: #001080">day:</span><span style="color: #000000"> </span><span style="color: #098658">0</span><span style="color: #000000">, </span><span style="color: #001080">task:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;put on your shirt&#039;</span><span style="color: #000000"> },</span>
+<span style="color: #000000">  { </span><span style="color: #001080">day:</span><span style="color: #000000"> </span><span style="color: #098658">0</span><span style="color: #000000">, </span><span style="color: #001080">task:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;put on your jacket&#039;</span><span style="color: #000000"> },</span>
+<span style="color: #000000">  { </span><span style="color: #001080">day:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #001080">task:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;put on your shorts&#039;</span><span style="color: #000000"> },</span>
+<span style="color: #000000">  { </span><span style="color: #001080">day:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #001080">task:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;put on your jacket&#039;</span><span style="color: #000000"> },</span>
+<span style="color: #000000">  { </span><span style="color: #001080">day:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #001080">task:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;put on your shoes&#039;</span><span style="color: #000000"> },</span>
+<span style="color: #000000">  { </span><span style="color: #001080">day:</span><span style="color: #000000"> </span><span style="color: #098658">2</span><span style="color: #000000">, </span><span style="color: #001080">task:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;put on your shirt&#039;</span><span style="color: #000000"> },</span>
+<span style="color: #000000">]);</span>
 </code></pre>
 		</div>
 		<section class="tsd-panel-group tsd-index-group">
@@ -2880,7 +2930,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Comparator&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>a<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span>, b<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/98a29a4/src/types.ts#L4">types.ts:4</a></li>
+						<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/2dd4e0b/src/types.ts#L4">types.ts:4</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2932,7 +2982,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/98a29a4/src/comparators.ts#L66">comparators.ts:66</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/2dd4e0b/src/comparators.ts#L66">comparators.ts:66</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2985,7 +3035,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/98a29a4/src/comparators.ts#L77">comparators.ts:77</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/2dd4e0b/src/comparators.ts#L77">comparators.ts:77</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3039,7 +3089,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/98a29a4/src/comparators.ts#L154">comparators.ts:154</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/2dd4e0b/src/comparators.ts#L154">comparators.ts:154</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3097,7 +3147,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/98a29a4/src/factories.ts#L28">factories.ts:28</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/2dd4e0b/src/factories.ts#L28">factories.ts:28</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3141,7 +3191,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/98a29a4/src/factories.ts#L204">factories.ts:204</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/2dd4e0b/src/factories.ts#L204">factories.ts:204</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3189,7 +3239,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/98a29a4/src/factories.ts#L13">factories.ts:13</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/2dd4e0b/src/factories.ts#L13">factories.ts:13</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3260,7 +3310,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/98a29a4/src/factories.ts#L63">factories.ts:63</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/2dd4e0b/src/factories.ts#L63">factories.ts:63</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3306,7 +3356,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/98a29a4/src/comparators.ts#L47">comparators.ts:47</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/2dd4e0b/src/comparators.ts#L47">comparators.ts:47</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3352,7 +3402,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/98a29a4/src/comparators.ts#L56">comparators.ts:56</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/2dd4e0b/src/comparators.ts#L56">comparators.ts:56</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3394,7 +3444,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/98a29a4/src/comparators.ts#L20">comparators.ts:20</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/2dd4e0b/src/comparators.ts#L20">comparators.ts:20</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3441,7 +3491,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/98a29a4/src/comparators.ts#L86">comparators.ts:86</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/2dd4e0b/src/comparators.ts#L86">comparators.ts:86</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3484,7 +3534,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/98a29a4/src/comparators.ts#L104">comparators.ts:104</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/2dd4e0b/src/comparators.ts#L104">comparators.ts:104</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3527,7 +3577,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/98a29a4/src/factories.ts#L48">factories.ts:48</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/2dd4e0b/src/factories.ts#L48">factories.ts:48</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3564,7 +3614,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/98a29a4/src/comparators.ts#L36">comparators.ts:36</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/2dd4e0b/src/comparators.ts#L36">comparators.ts:36</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3613,7 +3663,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/98a29a4/src/comparators.ts#L124">comparators.ts:124</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/2dd4e0b/src/comparators.ts#L124">comparators.ts:124</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3659,7 +3709,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/98a29a4/src/comparators.ts#L135">comparators.ts:135</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/2dd4e0b/src/comparators.ts#L135">comparators.ts:135</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3705,7 +3755,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/98a29a4/src/comparators.ts#L6">comparators.ts:6</a></li>
+								<li>Defined in <a href="https://github.com/JanMalch/comparing/blob/2dd4e0b/src/comparators.ts#L6">comparators.ts:6</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
