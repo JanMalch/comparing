@@ -1,0 +1,6 @@
+{
+  "includeVersion": true,
+  "entryPoints": ["src/comparing.ts"],
+  "out": "docs",
+  "plugin": "./docs-example-plugin.js"
+}

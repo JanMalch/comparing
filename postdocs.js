@@ -4,8 +4,6 @@ const replace = require('replace-in-file');
 
 // copy favicon
 fs.copyFileSync(path.resolve(__dirname, '.github/assets/favicon.ico'), path.resolve(__dirname, 'docs/favicon.ico'));
-// create empty .nojekyll file
-fs.closeSync(fs.openSync(path.resolve(__dirname, 'docs/.nojekyll'), 'w'));
 
 // add favicon in HTML
 const results = replace.sync({
