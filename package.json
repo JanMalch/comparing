@@ -15,7 +15,8 @@
   "module": "dist/comparing.es5.js",
   "typings": "dist/types/comparing.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "CHANGELOG.md"
   ],
   "author": "JanMalch",
   "repository": {
