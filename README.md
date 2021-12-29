@@ -12,12 +12,12 @@
 
 - predefined Comparators for common use-cases
 - lightweight
-- easily sort arrays of objects via [`compareBy`](http://janmalch.github.io/comparing/#compareby)
-- [compose](http://janmalch.github.io/comparing/#composecomparators) or [reverse](http://janmalch.github.io/comparing/#reversecomparator) predefined and custom Comparators
-- define custom [orders for enums](http://janmalch.github.io/comparing/#comparatorfororder) or other arbitrary value sets
-- create comparators that [support type unions](http://janmalch.github.io/comparing/#comparatorwithpredicate)
+- easily sort arrays of objects via [`compareBy`](https://janmalch.github.io/comparing/modules.html#compareBy)
+- [compose](https://janmalch.github.io/comparing/modules.html#composeComparators) or [reverse](https://janmalch.github.io/comparing/modules.html#reverseComparator) predefined and custom Comparators
+- define custom [orders for enums](https://janmalch.github.io/comparing/modules.html#comparatorForOrder) or other arbitrary value sets
+- create comparators that [support type unions](https://janmalch.github.io/comparing/modules.html#comparatorWithPredicate)
 
-Make sure to checkout the [documentation][docs-url].
+Make sure to check out the [documentation][docs-url].
 
 ## Installation
 
@@ -42,21 +42,21 @@ expect(actual).toEqual([1, 3, 4, 5]);
 ```
 
 ```typescript
-const comparator: Comparator<string | null> = composeComparators([ nullishFirst, localeCompare ]);
-const actual = ["A", "a", "b", null, "B"].sort(comparator);
-expect(actual).toEqual([null, "a", "A", "b", "B"]);
+const comparator: Comparator<string | null> = composeComparators([nullishFirst, localeCompare]);
+const actual = ['A', 'a', 'b', null, 'B'].sort(comparator);
+expect(actual).toEqual([null, 'a', 'A', 'b', 'B']);
 
 const reversedComparator = reverseComparator(comparator);
-const actualReversed = ["A", "a", "b", null, "B"].sort(reversedComparator);
-expect(actual).toEqual(["B", "b", "A", "a", null]);
+const actualReversed = ['A', 'a', 'b', null, 'B'].sort(reversedComparator);
+expect(actual).toEqual(['B', 'b', 'A', 'a', null]);
 ```
 
 ### Comparing objects
 
 ```typescript
-const nameComparator: Comparator<{ name: string }> = compareBy(x => x.name, ignoreCase);
-const orderComparator = compareBy(x => x.order, composeComparators([ nullishLast, naturalOrder ]));
-const myObjectComparator = composeComparators([ orderComparator, nameComparator ]);
+const nameComparator: Comparator<{ name: string }> = compareBy((x) => x.name, ignoreCase);
+const orderComparator = compareBy((x) => x.order, composeComparators([nullishLast, naturalOrder]));
+const myObjectComparator = composeComparators([orderComparator, nameComparator]);
 
 const actual = [
   { name: 'B', order: 1 },
@@ -77,11 +77,17 @@ expect(actual).toEqual([
 ]);
 ```
 
-The library has no dependencies, thus only creates and 
+The library has no dependencies, thus only creates and
 works with the JavaScript objects and functions you already know.
 
 ```typescript
-import { compareBy, comparatorForOrder, compareBy, composeComparators, Comparator } from 'comparing';
+import {
+  compareBy,
+  comparatorForOrder,
+  compareBy,
+  composeComparators,
+  Comparator,
+} from 'comparing';
 import toposort from 'toposort'; // not included in this library
 
 const graph = [
@@ -92,9 +98,9 @@ const graph = [
 ];
 
 const taskComparator = comparatorForOrder(toposort(graph));
-const comparator: Comparator<{ day: number, task: string }> = composeComparators([
-  compareBy(x => x.day), // naturalOrder implicitly
-  compareBy(x => x.task, taskComparator)
+const comparator: Comparator<{ day: number; task: string }> = composeComparators([
+  compareBy((x) => x.day), // naturalOrder implicitly
+  compareBy((x) => x.task, taskComparator),
 ]);
 
 const todoList = [
