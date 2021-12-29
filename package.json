@@ -32,15 +32,13 @@
     "access": "public"
   },
   "scripts": {
-    "lint": "eslint --fix {src,test}/**/*.ts",
     "prebuild": "rimraf dist docs",
     "build": "tsc --module commonjs && rollup -c rollup.config.ts",
+    "test": "jest --coverage --no-cache",
+    "lint": "eslint --fix {src,test}/**/*.ts",
     "predocs": "tsc docs-example-plugin.ts",
     "docs": "typedoc",
     "postdocs": "node postdocs.js",
-    "start": "rollup -c rollup.config.ts -w",
-    "test": "jest --coverage",
-    "test:prod": "npm run lint && npm run test -- --no-cache",
     "release": "standard-version",
     "prettier": "prettier --write {src,test}**/*.ts",
     "prepare": "husky install"
