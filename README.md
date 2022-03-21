@@ -53,6 +53,9 @@ expect(actual).toEqual(['B', 'b', 'A', 'a', null]);
 
 ### Comparing objects
 
+The following example shows how to sort an array of objects, which have an optional `order` property that should take precedence when sorting.
+If equal or not present, then the objects should be sorted by their `name` property.
+
 ```typescript
 const nameComparator: Comparator<{ name: string }> = compareBy((x) => x.name, ignoreCase);
 const orderComparator = compareBy((x) => x.order, composeComparators([nullishLast, naturalOrder]));
@@ -77,18 +80,42 @@ expect(actual).toEqual([
 ]);
 ```
 
+### Usage with other libraries
+
 The library has no dependencies, thus only creates and
 works with the JavaScript objects and functions you already know.
+
+**Compare with dot path**
+
+```typescript
+import { compareBy } from 'comparing';
+import get from 'lodash/fp/get';
+
+const abcComparator = compareBy(get('a.b.c'));
+
+const data = [
+  { a: { b: { c: 1 } } },
+  { a: { b: { c: 0 } } },
+  { a: { b: { c: 2 } } },
+].sort(abcComparator);
+
+expect(data).toEqual([
+  { a: { b: { c: 0 } } },
+  { a: { b: { c: 1 } } },
+  { a: { b: { c: 2 } } },
+]);
+```
+
+**Sort dependencies**
 
 ```typescript
 import {
   compareBy,
   comparatorForOrder,
-  compareBy,
   composeComparators,
   Comparator,
 } from 'comparing';
-import toposort from 'toposort'; // not included in this library
+import toposort from 'toposort';
 
 const graph = [
   // must first put on the shirt before the jacket, and so on ...
