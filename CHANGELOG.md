@@ -1,4 +1,11 @@
 
+## [1.3.0](https://github.com/JanMalch/comparing/compare/v1.2.0...v1.3.0) (2022-06-12)
+
+
+### Features
+
+* add Comparable interface with comparables comparator ([d0c81f7](https://github.com/JanMalch/comparing/commit/d0c81f72b11b88a0523ad9eaa8881f05b4a703d6))
+
 ## [1.2.0](https://github.com/JanMalch/comparing/compare/v1.1.0...v1.2.0) (2021-06-15)
 
 
