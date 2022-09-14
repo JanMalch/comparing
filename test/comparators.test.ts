@@ -1,7 +1,10 @@
 import {
   byLength,
   bySize,
+  Comparable,
   comparables,
+  compareBy,
+  composeComparators,
   ignoreCase,
   localeCompare,
   naturalOrder,
@@ -11,9 +14,7 @@ import {
   trueFirst,
   trueLast,
   unchanged,
-} from '../src/comparators';
-import { compareBy, composeComparators } from '../src/factories';
-import { Comparable } from '../src/types';
+} from '../src';
 
 const FIRST_BEFORE_SECOND = -1;
 const FIRST_SAME_AS_SECOND = 0;

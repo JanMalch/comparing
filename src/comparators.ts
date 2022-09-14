@@ -1,9 +1,11 @@
-import { Comparable, Comparator } from './types';
+import { Comparable } from './types';
 
 /**
  * A comparator, that will leave any order unchanged by returning 0 for every comparison.
  */
-export const unchanged: Comparator<any> = () => 0;
+export function unchanged(): number {
+  return 0;
+}
 
 /**
  * Compares the values `a` and `b` by their natural order via the `<` operator.
@@ -17,7 +19,9 @@ export const unchanged: Comparator<any> = () => 0;
  * naturalOrder("AA", "B") === -1; // alphabetical for strings
  * naturalOrder("A", "a") === -1; // alphabetical for strings
  */
-export const naturalOrder: Comparator<any> = (a, b) => (a === b ? 0 : a < b ? -1 : 1);
+export function naturalOrder<T>(a: T, b: T): number {
+  return a === b ? 0 : a < b ? -1 : 1;
+}
 
 /**
  * Compares the values `a` and `b` by their natural reversed order via the `>` operator.
@@ -33,7 +37,9 @@ export const naturalOrder: Comparator<any> = (a, b) => (a === b ? 0 : a < b ? -1
  * reversedOrder(0, 0) === 0;
  * reversedOrder(0, "0") === 1;
  */
-export const reversedOrder: Comparator<any> = (a, b) => (a === b ? 0 : a > b ? -1 : 1);
+export function reversedOrder<T>(a: T, b: T): number {
+  return a === b ? 0 : a > b ? -1 : 1;
+}
 
 /**
  * Compares two strings case insensitively with `localeCompare`.
@@ -44,8 +50,9 @@ export const reversedOrder: Comparator<any> = (a, b) => (a === b ? 0 : a > b ? -
  * ignoreCase("A", "a") === 0;
  * compareBy(v => v.toString(), ignoreCase)(0, "0") === 0;
  */
-export const ignoreCase: Comparator<string> = (a, b) =>
-  a.toLowerCase().localeCompare(b.toLowerCase());
+export function ignoreCase(a: string, b: string): number {
+  return a.toLowerCase().localeCompare(b.toLowerCase());
+}
 
 /**
  * Compares two strings case sensitively with `localeCompare`.
@@ -53,7 +60,9 @@ export const ignoreCase: Comparator<string> = (a, b) =>
  * @param b second value
  * @see ignoreCase
  */
-export const localeCompare: Comparator<string> = (a, b) => a.localeCompare(b);
+export function localeCompare(a: string, b: string): number {
+  return a.localeCompare(b);
+}
 
 /**
  * Compares two values by their `length` property.
@@ -63,7 +72,9 @@ export const localeCompare: Comparator<string> = (a, b) => a.localeCompare(b);
  * @example
  * ['abc', 'a', 'ab'].sort(byLength) == ['a', 'ab', 'abc'];
  */
-export const byLength: Comparator<{ length: number }> = (a, b) => a.length - b.length;
+export function byLength(a: { length: number }, b: { length: number }): number {
+  return a.length - b.length;
+}
 
 /**
  * Compares two values by their `size` property.
@@ -74,7 +85,9 @@ export const byLength: Comparator<{ length: number }> = (a, b) => a.length - b.l
  * [new Set([0, 1, 2]), new Set([0]), new Set([0, 1])].sort(bySize)
  *   == [new Set([0]), new Set([0, 1]), new Set([0, 1, 2])];
  */
-export const bySize: Comparator<{ size: number }> = (a, b) => a.size - b.size;
+export function bySize(a: { size: number }, b: { size: number }): number {
+  return a.size - b.size;
+}
 
 /**
  * Compares two values and puts `null` and `undefined` first.
@@ -83,7 +96,7 @@ export const bySize: Comparator<{ size: number }> = (a, b) => a.size - b.size;
  * @param b second value
  * @see nullishLast
  */
-export const nullishFirst: Comparator<unknown> = (a, b) => {
+export function nullishFirst<T>(a: T, b: T): number {
   if (a == null && b == null) {
     return 0;
   } else if (a == null) {
@@ -92,7 +105,7 @@ export const nullishFirst: Comparator<unknown> = (a, b) => {
     return 1;
   }
   return 0;
-};
+}
 
 /**
  * Compares two values and puts `null` and `undefined` last.
@@ -101,7 +114,7 @@ export const nullishFirst: Comparator<unknown> = (a, b) => {
  * @param b second value
  * @see nullishFirst
  */
-export const nullishLast: Comparator<any> = (a, b) => {
+export function nullishLast<T>(a: T, b: T): number {
   if (a == null && b == null) {
     return 0;
   } else if (a == null) {
@@ -110,7 +123,7 @@ export const nullishLast: Comparator<any> = (a, b) => {
     return -1;
   }
   return 0;
-};
+}
 
 /**
  * Compares two values and puts `true` first.
@@ -121,7 +134,9 @@ export const nullishLast: Comparator<any> = (a, b) => {
  * // use compareBy to broaden to truthy and falsy values
  * const truthyFirst = compareBy(x => !!x, trueFirst);
  */
-export const trueFirst: Comparator<boolean> = (a, b) => (a === b ? 0 : a ? -1 : 1);
+export function trueFirst(a: boolean, b: boolean): number {
+  return a === b ? 0 : a ? -1 : 1;
+}
 
 /**
  * Compares two values and puts `true` last.
@@ -132,7 +147,9 @@ export const trueFirst: Comparator<boolean> = (a, b) => (a === b ? 0 : a ? -1 : 
  * // use compareBy to broaden to truthy and falsy values
  * const truthyLast = compareBy(x => !!x, trueLast);
  */
-export const trueLast: Comparator<boolean> = (a, b) => (a === b ? 0 : a ? 1 : -1);
+export function trueLast(a: boolean, b: boolean): number {
+  return a === b ? 0 : a ? 1 : -1;
+}
 
 /**
  * Compares two values that implement the `Comparable` interface,
@@ -151,4 +168,6 @@ export const trueLast: Comparator<boolean> = (a, b) => (a === b ? 0 : a ? 1 : -1
  * }
  * [new Person('a', 100), new Person('b', 20), new Person('c', 50)].sort(comparables);
  */
-export const comparables = <T>(a: Comparable<T>, b: T) => a.compareTo(b);
+export function comparables<T>(a: Comparable<T>, b: T): number {
+  return a.compareTo(b);
+}

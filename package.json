@@ -11,9 +11,16 @@
     "sort",
     "sorting"
   ],
-  "main": "dist/comparing.umd.js",
-  "module": "dist/comparing.es5.js",
-  "typings": "dist/types/comparing.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
   "files": [
     "dist",
     "CHANGELOG.md"
@@ -32,48 +39,37 @@
     "access": "public"
   },
   "scripts": {
-    "prebuild": "rimraf dist docs",
-    "build": "tsc --module commonjs && rollup -c rollup.config.ts",
+    "build": "tsup src/index.ts --format \"cjs,esm\" --dts --clean",
     "test": "jest --coverage --no-cache",
     "lint": "eslint --fix {src,test}/**/*.ts",
-    "predocs": "tsc docs-example-plugin.ts",
-    "docs": "typedoc",
-    "postdocs": "node postdocs.js",
+    "docs": "typedoc && node postdocs.js",
     "release": "standard-version",
     "prettier": "prettier --write {src,test}**/*.ts",
+    "prepack": "npm run build",
     "prepare": "husky install"
   },
   "sideEffects": false,
   "devDependencies": {
-    "@commitlint/cli": "^17.0.2",
-    "@commitlint/config-conventional": "^17.0.2",
-    "@types/jest": "^28.1.1",
-    "@types/node": "^17.0.42",
-    "@typescript-eslint/eslint-plugin": "^5.27.1",
-    "@typescript-eslint/parser": "^5.27.1",
-    "eslint": "^8.17.0",
+    "@commitlint/cli": "^17.1.2",
+    "@commitlint/config-conventional": "^17.1.0",
+    "@types/jest": "^29.0.2",
+    "@types/node": "^18.7.18",
+    "@typescript-eslint/eslint-plugin": "^5.37.0",
+    "@typescript-eslint/parser": "^5.37.0",
+    "eslint": "^8.23.1",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "husky": "^8.0.1",
-    "jest": "^28.1.1",
-    "jest-config": "^28.1.1",
-    "lint-staged": "^13.0.1",
-    "lodash.camelcase": "^4.3.0",
-    "prettier": "^2.6.2",
+    "jest": "^29.0.3",
+    "jest-config": "^29.0.3",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1",
     "replace-in-file": "^6.3.5",
-    "rimraf": "^3.0.2",
-    "rollup": "^2.75.6",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-json": "^4.0.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-sourcemaps": "^0.6.3",
-    "rollup-plugin-typescript2": "^0.32.1",
     "standard-version": "^9.5.0",
-    "ts-jest": "^28.0.4",
-    "ts-node": "^10.8.1",
-    "typedoc": "^0.22.17",
-    "typedoc-plugin-replace-in-comments": "^3.1.0",
-    "typescript": "^4.7.3"
+    "ts-jest": "^29.0.1",
+    "tsup": "^6.2.3",
+    "typedoc": "^0.23.14",
+    "typescript": "^4.8.3"
   }
 }

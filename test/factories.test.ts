@@ -1,18 +1,16 @@
 import {
   byLength,
-  ignoreCase,
-  localeCompare,
-  naturalOrder,
-  reversedOrder,
-} from '../src/comparators';
-import {
+  Comparator,
   comparatorForOrder,
   comparatorWithPredicate,
   compareBy,
   composeComparators,
+  ignoreCase,
+  localeCompare,
+  naturalOrder,
   reverseComparator,
-} from '../src/factories';
-import { Comparator } from '../src/types';
+  reversedOrder,
+} from '../src';
 
 const FIRST_BEFORE_SECOND = -1;
 const FIRST_SAME_AS_SECOND = 0;
